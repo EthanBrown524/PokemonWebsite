@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Pokedollar coin icon">
+  <defs>
+    <linearGradient id="coinFill" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#fff1a7"/>
+      <stop offset="55%" stop-color="#f6c64e"/>
+      <stop offset="100%" stop-color="#d58f1b"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="57" fill="#8b5217"/>
+  <circle cx="64" cy="64" r="51" fill="url(#coinFill)"/>
+  <circle cx="64" cy="64" r="39" fill="none" stroke="#f9db69" stroke-width="6"/>
+  <circle cx="48" cy="42" r="10" fill="#fff9ce" opacity="0.45"/>
+  <path
+    d="M46 91V33h29c14 0 25 10 25 22s-11 22-25 22H46"
+    fill="none"
+    stroke="#8b5217"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="12"
+  />
+  <line x1="36" y1="58" x2="83" y2="58" stroke="#8b5217" stroke-linecap="round" stroke-width="9"/>
+  <line x1="36" y1="72" x2="88" y2="72" stroke="#8b5217" stroke-linecap="round" stroke-width="9"/>
+</svg>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pokemon Battle Simulator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div id="status-banner" class="status-banner" role="status" aria-live="polite">
+      Loading battle data...
+    </div>
+
+    <section id="start-screen" class="screen is-active" aria-labelledby="start-title">
+      <div class="panel start-panel">
+        <p class="eyebrow">Random battle mode</p>
+        <h1 id="start-title">Pokemon Battle Simulator</h1>
+        <p class="lead">
+          Start with 100 Pokedollars, spin for a random Pokemon, place a bet on the match, and keep the run alive
+          until you cash out or go broke.
+        </p>
+        <div class="hero-sprite-frame">
+          <img id="start-pikachu" alt="Pikachu preview sprite" class="pixel-art hero-sprite">
+        </div>
+        <button id="start-run-button" class="app-button" type="button" disabled>Start</button>
+      </div>
+    </section>
+
+    <section id="roulette-screen" class="screen" aria-labelledby="roulette-title">
+      <div class="panel roulette-panel">
+        <div class="topline">
+          <div class="wallet-pill compact">
+            <img src="assets/icons/pokedollar.svg" alt="" class="wallet-icon">
+            <span>Wallet</span>
+            <strong id="roulette-wallet-amount">100</strong>
+          </div>
+        </div>
+        <h2 id="roulette-title">Pokemon Roulette</h2>
+        <p id="roulette-hint" class="subhead">Spinning to choose your Pokemon...</p>
+        <div class="roulette-board" aria-live="polite">
+          <div class="roulette-target-label">YOUR POKEMON</div>
+          <div class="roulette-slot slot-0 target-slot" data-slot-index="0">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+          <div class="roulette-slot slot-1" data-slot-index="1">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+          <div class="roulette-slot slot-2" data-slot-index="2">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+          <div class="roulette-slot slot-3" data-slot-index="3">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+          <div class="roulette-slot slot-4" data-slot-index="4">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+          <div class="roulette-slot slot-5" data-slot-index="5">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+          <div class="roulette-slot slot-6" data-slot-index="6">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+          <div class="roulette-slot slot-7" data-slot-index="7">
+            <img alt="" class="pixel-art">
+            <span></span>
+          </div>
+        </div>
+        <p id="roulette-result" class="roulette-result"></p>
+      </div>
+    </section>
+
+    <section id="game-screen" class="screen" aria-labelledby="toolbar-title">
+      <div class="toolbar panel">
+        <div class="toolbar-title-group">
+          <h2 id="toolbar-title">Random Pokemon Battle</h2>
+          <p id="matchup-label" class="toolbar-matchup">Loading random matchup...</p>
+        </div>
+        <div class="wallet-pill">
+          <img src="assets/icons/pokedollar.svg" alt="" class="wallet-icon">
+          <span>Wallet</span>
+          <strong id="wallet-amount">100</strong>
+        </div>
+        <button id="random-matchup-button" class="app-button" type="button">Random Matchup</button>
+        <button id="start-battle-button" class="app-button" type="button" disabled>Start Battle</button>
+        <button id="cash-out-button" class="app-button secondary" type="button">Cash Out</button>
+      </div>
+
+      <div class="game-grid">
+        <div class="panel arena-panel">
+          <div class="battlefield">
+            <div class="versus-text">VS</div>
+
+            <section class="combatant combatant-opponent">
+              <div class="status-card">
+                <div id="opponent-name" class="status-name">Opponent</div>
+                <div class="hp-track">
+                  <div id="opponent-hp-fill" class="hp-fill"></div>
+                </div>
+                <div id="opponent-hp-label" class="hp-label">0/0</div>
+              </div>
+              <div class="sprite-wrap">
+                <img id="opponent-sprite" alt="Opponent Pokemon sprite" class="pixel-art battle-sprite">
+              </div>
+            </section>
+
+            <section class="combatant combatant-player">
+              <div class="status-card">
+                <div id="player-name" class="status-name">Player</div>
+                <div class="hp-track">
+                  <div id="player-hp-fill" class="hp-fill"></div>
+                </div>
+                <div id="player-hp-label" class="hp-label">0/0</div>
+              </div>
+              <div class="sprite-wrap">
+                <img id="player-sprite" alt="Player Pokemon sprite" class="pixel-art battle-sprite">
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <div class="panel betting-panel">
+            <div class="panel-heading">
+              <h3>Betting Desk</h3>
+              <div class="wallet-inline">
+                <img src="assets/icons/pokedollar.svg" alt="" class="wallet-icon small">
+                <span id="wallet-inline-amount">100</span>
+              </div>
+            </div>
+            <p id="prediction-text" class="prediction-text">ML prediction unavailable.</p>
+
+            <div class="bet-fieldset">
+              <span class="field-label">Bet On</span>
+              <div class="toggle-row">
+                <button id="bet-player-button" class="toggle-button is-selected" type="button">Your Pokemon</button>
+                <button id="bet-opponent-button" class="toggle-button" type="button">Opponent</button>
+              </div>
+            </div>
+
+            <div class="bet-fieldset">
+              <label for="bet-amount" class="field-label">Bet Amount</label>
+              <div class="bet-input-row">
+                <img src="assets/icons/pokedollar.svg" alt="" class="wallet-icon small">
+                <input id="bet-amount" type="number" min="1" step="1" value="10" inputmode="numeric">
+                <button id="bet-max-button" class="mini-button" type="button">Max</button>
+              </div>
+              <p id="bet-summary" class="bet-summary">Choose your side and lock in a bet before the battle starts.</p>
+            </div>
+
+            <div class="panel-note" id="round-summary">
+              Spin a matchup, set your wager, and press Start Battle to begin the round.
+            </div>
+          </div>
+
+          <div class="panel log-panel">
+            <div class="panel-heading">
+              <h3>Battle Log</h3>
+            </div>
+            <div id="battle-log" class="battle-log" aria-live="polite"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="summary-screen" class="screen" aria-labelledby="summary-title">
+      <div class="panel summary-panel">
+        <p class="eyebrow">Run complete</p>
+        <h2 id="summary-title">Battle run finished</h2>
+        <p id="summary-copy" class="lead"></p>
+
+        <div class="summary-stats">
+          <div class="summary-stat">
+            <span class="summary-label">Final Wallet</span>
+            <strong id="summary-wallet" class="summary-value">100</strong>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-label">Battles Played</span>
+            <strong id="summary-rounds" class="summary-value">0</strong>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-label">Wins</span>
+            <strong id="summary-wins" class="summary-value">0</strong>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-label">Correct Bets</span>
+            <strong id="summary-bets" class="summary-value">0</strong>
+          </div>
+        </div>
+
+        <button id="restart-run-button" class="app-button" type="button">Play Again</button>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="web/js/app.mjs"></script>
+</body>
+</html>
