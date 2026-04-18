@@ -1,0 +1,572 @@
+id,name,type,power,accuracy,pp,priority,damage_class,effect_text
+1,Pound,Normal,40,100,35,0,Physical,Inflicts regular damage with no additional effect.
+2,Karate Chop,Fighting,50,100,25,0,Physical,Has an increased chance for a critical hit.
+3,Double Slap,Normal,15,85,10,0,Physical,Hits 2-5 times in one turn.
+4,Comet Punch,Normal,18,85,15,0,Physical,Hits 2-5 times in one turn.
+5,Mega Punch,Normal,80,85,20,0,Physical,Inflicts regular damage with no additional effect.
+6,Pay Day,Normal,40,100,20,0,Physical,Scatters money on the ground worth five times the user’s level.
+7,Fire Punch,Fire,75,100,15,0,Physical,Has a 10% chance to burn the target.
+8,Ice Punch,Ice,75,100,15,0,Physical,Has a 10% chance to freeze the target.
+9,Thunder Punch,Electric,75,100,15,0,Physical,Has a 10% chance to paralyze the target.
+10,Scratch,Normal,40,100,35,0,Physical,Inflicts regular damage with no additional effect.
+11,Vise Grip,Normal,55,100,30,0,Physical,Inflicts regular damage with no additional effect.
+13,Razor Wind,Normal,80,100,10,0,Special,Requires a turn to charge before attacking.
+15,Cut,Normal,50,95,30,0,Physical,Inflicts regular damage with no additional effect.
+16,Gust,Flying,40,100,35,0,Special,Inflicts regular damage and can hit Pokémon in the air.
+17,Wing Attack,Flying,60,100,35,0,Physical,Inflicts regular damage with no additional effect.
+19,Fly,Flying,90,95,15,0,Physical,"User flies high into the air, dodging all attacks, and hits next turn."
+20,Bind,Normal,15,85,20,0,Physical,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+21,Slam,Normal,80,75,20,0,Physical,Inflicts regular damage with no additional effect.
+22,Vine Whip,Grass,45,100,25,0,Physical,Inflicts regular damage with no additional effect.
+23,Stomp,Normal,65,100,20,0,Physical,Has a 30% chance to make the target flinch.
+24,Double Kick,Fighting,30,100,30,0,Physical,Hits twice in one turn.
+25,Mega Kick,Normal,120,75,5,0,Physical,Inflicts regular damage with no additional effect.
+26,Jump Kick,Fighting,100,95,10,0,Physical,"If the user misses, it takes half the damage it would have inflicted in recoil."
+27,Rolling Kick,Fighting,60,85,15,0,Physical,Has a 30% chance to make the target flinch.
+29,Headbutt,Normal,70,100,15,0,Physical,Has a 30% chance to make the target flinch.
+30,Horn Attack,Normal,65,100,25,0,Physical,Inflicts regular damage with no additional effect.
+31,Fury Attack,Normal,15,85,20,0,Physical,Hits 2-5 times in one turn.
+33,Tackle,Normal,40,100,35,0,Physical,Inflicts regular damage with no additional effect.
+34,Body Slam,Normal,85,100,15,0,Physical,Has a 30% chance to paralyze the target.
+35,Wrap,Normal,15,90,20,0,Physical,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+36,Take Down,Normal,90,85,20,0,Physical,User receives 1/4 the damage it inflicts in recoil.
+37,Thrash,Normal,120,100,10,0,Physical,"Hits every turn for 2-3 turns, then confuses the user."
+38,Double-Edge,Normal,120,100,15,0,Physical,User receives 1/3 the damage inflicted in recoil.
+40,Poison Sting,Poison,15,100,35,0,Physical,Has a 30% chance to poison the target.
+41,Twineedle,Bug,25,100,20,0,Physical,Hits twice in the same turn. Has a 20% chance to poison the target.
+42,Pin Missile,Bug,25,95,20,0,Physical,Hits 2-5 times in one turn.
+44,Bite,Dark,60,100,25,0,Physical,Has a 30% chance to make the target flinch.
+51,Acid,Poison,40,100,30,0,Special,Has a 10% chance to lower the target’s Special Defense by one stage.
+52,Ember,Fire,40,100,25,0,Special,Has a 10% chance to burn the target.
+53,Flamethrower,Fire,90,100,15,0,Special,Has a 10% chance to burn the target.
+55,Water Gun,Water,40,100,25,0,Special,Inflicts regular damage with no additional effect.
+56,Hydro Pump,Water,110,80,5,0,Special,Inflicts regular damage with no additional effect.
+57,Surf,Water,90,100,15,0,Special,Inflicts regular damage and can hit Dive users.
+58,Ice Beam,Ice,90,100,10,0,Special,Has a 10% chance to freeze the target.
+59,Blizzard,Ice,110,70,5,0,Special,Has a 10% chance to freeze the target.
+60,Psybeam,Psychic,65,100,20,0,Special,Has a 10% chance to confuse the target.
+61,Bubble Beam,Water,65,100,20,0,Special,Has a 10% chance to lower the target’s Speed by one stage.
+62,Aurora Beam,Ice,65,100,20,0,Special,Has a 10% chance to lower the target’s Attack by one stage.
+63,Hyper Beam,Normal,150,90,5,0,Special,User foregoes its next turn to recharge.
+64,Peck,Flying,35,100,35,0,Physical,Inflicts regular damage with no additional effect.
+65,Drill Peck,Flying,80,100,20,0,Physical,Inflicts regular damage with no additional effect.
+66,Submission,Fighting,80,80,20,0,Physical,User receives 1/4 the damage it inflicts in recoil.
+70,Strength,Normal,80,100,15,0,Physical,Inflicts regular damage with no additional effect.
+71,Absorb,Grass,20,100,25,0,Special,Drains half the damage inflicted to heal the user.
+72,Mega Drain,Grass,40,100,15,0,Special,Drains half the damage inflicted to heal the user.
+75,Razor Leaf,Grass,55,95,25,0,Physical,Has an increased chance for a critical hit.
+76,Solar Beam,Grass,120,100,10,0,Special,Requires a turn to charge before attacking.
+80,Petal Dance,Grass,120,100,10,0,Special,"Hits every turn for 2-3 turns, then confuses the user."
+83,Fire Spin,Fire,35,85,15,0,Special,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+84,Thunder Shock,Electric,40,100,30,0,Special,Has a 10% chance to paralyze the target.
+85,Thunderbolt,Electric,90,100,15,0,Special,Has a 10% chance to paralyze the target.
+87,Thunder,Electric,110,70,10,0,Special,Has a 30% chance to paralyze the target.
+88,Rock Throw,Rock,50,90,15,0,Physical,Inflicts regular damage with no additional effect.
+89,Earthquake,Ground,100,100,10,0,Physical,Inflicts regular damage and can hit Dig users.
+91,Dig,Ground,80,100,10,0,Physical,"User digs underground, dodging all attacks, and hits next turn."
+93,Confusion,Psychic,50,100,25,0,Special,Has a 10% chance to confuse the target.
+94,Psychic,Psychic,90,100,10,0,Special,Has a 10% chance to lower the target’s Special Defense by one stage.
+98,Quick Attack,Normal,40,100,30,1,Physical,Inflicts regular damage with no additional effect.
+99,Rage,Normal,20,100,20,0,Physical,"If the user is hit after using this move, its Attack rises by one stage."
+120,Self-Destruct,Normal,200,100,5,0,Physical,User faints.
+121,Egg Bomb,Normal,100,75,10,0,Physical,Inflicts regular damage with no additional effect.
+122,Lick,Ghost,30,100,30,0,Physical,Has a 30% chance to paralyze the target.
+123,Smog,Poison,30,70,20,0,Special,Has a 40% chance to poison the target.
+124,Sludge,Poison,65,100,20,0,Special,Has a 30% chance to poison the target.
+125,Bone Club,Ground,65,85,20,0,Physical,Has a 10% chance to make the target flinch.
+126,Fire Blast,Fire,110,85,5,0,Special,Has a 10% chance to burn the target.
+127,Waterfall,Water,80,100,15,0,Physical,Has a 20% chance to make the target flinch.
+128,Clamp,Water,35,85,15,0,Physical,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+129,Swift,Normal,60,,20,0,Special,Never misses.
+130,Skull Bash,Normal,130,100,10,0,Physical,Raises the user’s Defense by one stage. User charges for one turn before attacking.
+131,Spike Cannon,Normal,20,100,15,0,Physical,Hits 2-5 times in one turn.
+132,Constrict,Normal,10,100,35,0,Physical,Has a 10% chance to lower the target’s Speed by one stage.
+136,High Jump Kick,Fighting,130,90,10,0,Physical,"If the user misses, it takes half the damage it would have inflicted in recoil."
+138,Dream Eater,Psychic,100,100,15,0,Special,Only works on sleeping Pokémon. Drains half the damage inflicted to heal the user.
+140,Barrage,Normal,15,85,20,0,Physical,Hits 2-5 times in one turn.
+141,Leech Life,Bug,80,100,10,0,Physical,Drains half the damage inflicted to heal the user.
+143,Sky Attack,Flying,140,90,5,0,Physical,User charges for one turn before attacking. Has a 30% chance to make the target flinch.
+145,Bubble,Water,40,100,30,0,Special,Has a 10% chance to lower the target’s Speed by one stage.
+146,Dizzy Punch,Normal,70,100,10,0,Physical,Has a 20% chance to confuse the target.
+152,Crabhammer,Water,100,90,10,0,Physical,Has an increased chance for a critical hit.
+153,Explosion,Normal,250,100,5,0,Physical,User faints.
+154,Fury Swipes,Normal,18,80,15,0,Physical,Hits 2-5 times in one turn.
+155,Bonemerang,Ground,50,90,10,0,Physical,Hits twice in one turn.
+157,Rock Slide,Rock,75,90,10,0,Physical,Has a 30% chance to make the target flinch.
+158,Hyper Fang,Normal,80,90,15,0,Physical,Has a 10% chance to make the target flinch.
+161,Tri Attack,Normal,80,100,10,0,Special,"Has a 20% chance to burn, freeze, or paralyze the target."
+163,Slash,Normal,70,100,20,0,Physical,Has an increased chance for a critical hit.
+165,Struggle,Normal,50,,1,0,Physical,User takes 1/4 its max HP in recoil.
+167,Triple Kick,Fighting,10,90,10,0,Physical,"Hits three times, increasing power by 100% with each successful hit."
+168,Thief,Dark,60,100,25,0,Physical,Takes the target’s item.
+172,Flame Wheel,Fire,60,100,25,0,Physical,Has a 10% chance to burn the target. Lets frozen Pokémon thaw themselves.
+173,Snore,Normal,50,100,15,0,Special,Has a 30% chance to make the target flinch. Only works if the user is sleeping.
+177,Aeroblast,Flying,100,95,5,0,Special,Has an increased chance for a critical hit.
+181,Powder Snow,Ice,40,100,25,0,Special,Has a 10% chance to freeze the target.
+183,Mach Punch,Fighting,40,100,30,1,Physical,Inflicts regular damage with no additional effect.
+185,Feint Attack,Dark,60,,20,0,Physical,Never misses.
+188,Sludge Bomb,Poison,90,100,10,0,Special,Has a 30% chance to poison the target.
+189,Mud-Slap,Ground,20,100,10,0,Special,Has a 100% chance to lower the target’s accuracy by one stage.
+190,Octazooka,Water,65,85,10,0,Special,Has a 50% chance to lower the target’s accuracy by one stage.
+192,Zap Cannon,Electric,120,50,5,0,Special,Has a 100% chance to paralyze the target.
+196,Icy Wind,Ice,55,95,15,0,Special,Has a 100% chance to lower the target’s Speed by one stage.
+198,Bone Rush,Ground,25,90,10,0,Physical,Hits 2-5 times in one turn.
+200,Outrage,Dragon,120,100,10,0,Physical,"Hits every turn for 2-3 turns, then confuses the user."
+202,Giga Drain,Grass,75,100,10,0,Special,Drains half the damage inflicted to heal the user.
+205,Rollout,Rock,30,90,20,0,Physical,"Power doubles every turn this move is used in succession after the first, resetting after five turns."
+206,False Swipe,Normal,40,100,40,0,Physical,Cannot lower the target’s HP below 1.
+209,Spark,Electric,65,100,20,0,Physical,Has a 30% chance to paralyze the target.
+210,Fury Cutter,Bug,40,95,20,0,Physical,"Power doubles every turn this move is used in succession after the first, maxing out after five turns."
+211,Steel Wing,Steel,70,90,25,0,Physical,Has a 10% chance to raise the user’s Defense by one stage.
+221,Sacred Fire,Fire,100,95,5,0,Physical,Has a 50% chance to burn the target. Lets frozen Pokémon thaw themselves.
+223,Dynamic Punch,Fighting,100,50,5,0,Physical,Has a 100% chance to confuse the target.
+224,Megahorn,Bug,120,85,10,0,Physical,Inflicts regular damage with no additional effect.
+225,Dragon Breath,Dragon,60,100,20,0,Special,Has a 30% chance to paralyze the target.
+228,Pursuit,Dark,40,100,20,0,Physical,"Has double power against, and can hit, Pokémon attempting to switch out."
+229,Rapid Spin,Normal,50,100,40,0,Physical,"Frees the user from binding moves, removes Leech Seed, and blows away Spikes."
+231,Iron Tail,Steel,100,75,15,0,Physical,Has a 30% chance to lower the target’s Defense by one stage.
+232,Metal Claw,Steel,50,95,35,0,Physical,Has a 10% chance to raise the user’s Attack by one stage.
+233,Vital Throw,Fighting,70,,10,-1,Physical,Never misses.
+237,Hidden Power,Normal,60,100,15,0,Special,Power and type depend upon user’s IVs. Power can range from 30 to 70.
+238,Cross Chop,Fighting,100,80,5,0,Physical,Has an increased chance for a critical hit.
+239,Twister,Dragon,40,100,20,0,Special,Has a 20% chance to make the target flinch.
+242,Crunch,Dark,80,100,15,0,Physical,Has a 20% chance to lower the target’s Defense by one stage.
+245,Extreme Speed,Normal,80,100,5,2,Physical,Inflicts regular damage with no additional effect.
+246,Ancient Power,Rock,60,100,5,0,Special,Has a 10% chance to raise all of the user’s stats by one stage.
+247,Shadow Ball,Ghost,80,100,15,0,Special,Has a 20% chance to lower the target’s Special Defense by one stage.
+248,Future Sight,Psychic,120,100,10,0,Special,Hits the target two turns later.
+249,Rock Smash,Fighting,40,100,15,0,Physical,Has a 50% chance to lower the target’s Defense by one stage.
+250,Whirlpool,Water,35,85,15,0,Special,Prevents the target from leaving battle and inflicts 1/16 its max HP in damage for 2-5 turns.
+252,Fake Out,Normal,40,100,10,3,Physical,Can only be used as the first move after the user enters battle. Causes the target to flinch.
+253,Uproar,Normal,90,100,10,0,Special,Forced to use this move for several turns. Pokémon cannot fall asleep in that time.
+257,Heat Wave,Fire,95,90,10,0,Special,Has a 10% chance to burn the target.
+263,Facade,Normal,70,100,20,0,Physical,"Power doubles if user is burned, paralyzed, or poisoned."
+264,Focus Punch,Fighting,150,100,20,-3,Physical,"If the user takes damage before attacking, the attack is canceled."
+265,Smelling Salts,Normal,70,100,10,0,Physical,"If the target is paralyzed, inflicts double damage and cures the paralysis."
+276,Superpower,Fighting,120,100,5,0,Physical,Lowers the user’s Attack and Defense by one stage after inflicting damage.
+279,Revenge,Fighting,60,100,10,-4,Physical,Inflicts double damage if the user takes damage before attacking this turn.
+280,Brick Break,Fighting,75,100,15,0,Physical,Destroys Reflect and Light Screen.
+282,Knock Off,Dark,65,100,20,0,Physical,Target drops its held item.
+284,Eruption,Fire,150,100,5,0,Special,"Inflicts more damage when the user has more HP remaining, with a maximum of 150 power."
+290,Secret Power,Normal,70,100,20,0,Physical,Has a 30% chance to inflict a status effect which depends upon the terrain.
+291,Dive,Water,80,100,10,0,Physical,"User dives underwater, dodging all attacks, and hits next turn."
+292,Arm Thrust,Fighting,15,100,20,0,Physical,Hits 2-5 times in one turn.
+295,Luster Purge,Psychic,95,100,5,0,Special,Has a 50% chance to lower the target’s Special Defense by one stage.
+296,Mist Ball,Psychic,95,100,5,0,Special,Has a 50% chance to lower the target’s Special Attack by one stage.
+299,Blaze Kick,Fire,85,90,10,0,Physical,Has an increased chance for a critical hit and a 10% chance to burn the target.
+301,Ice Ball,Ice,30,90,20,0,Physical,"Power doubles every turn this move is used in succession after the first, resetting after five turns."
+302,Needle Arm,Grass,60,100,15,0,Physical,Has a 30% chance to make the target flinch.
+304,Hyper Voice,Normal,90,100,10,0,Special,Inflicts regular damage with no additional effect.
+305,Poison Fang,Poison,50,100,15,0,Physical,Has a 50% chance to badly poison the target.
+306,Crush Claw,Normal,75,95,10,0,Physical,Has a 50% chance to lower the target’s Defense by one stage.
+307,Blast Burn,Fire,150,90,5,0,Special,User foregoes its next turn to recharge.
+308,Hydro Cannon,Water,150,90,5,0,Special,User foregoes its next turn to recharge.
+309,Meteor Mash,Steel,90,90,10,0,Physical,Has a 20% chance to raise the user’s Attack by one stage.
+310,Astonish,Ghost,30,100,15,0,Physical,Has a 30% chance to make the target flinch.
+311,Weather Ball,Normal,50,100,10,0,Special,"If there be weather, this move has doubled power and the weather’s type."
+314,Air Cutter,Flying,60,95,25,0,Special,Has an increased chance for a critical hit.
+315,Overheat,Fire,130,90,5,0,Special,Lowers the user’s Special Attack by two stages after inflicting damage.
+317,Rock Tomb,Rock,60,95,15,0,Physical,Has a 100% chance to lower the target’s Speed by one stage.
+318,Silver Wind,Bug,60,100,5,0,Special,Has a 10% chance to raise all of the user’s stats by one stage.
+323,Water Spout,Water,150,100,5,0,Special,"Inflicts more damage when the user has more HP remaining, with a maximum of 150 power."
+324,Signal Beam,Bug,75,100,15,0,Special,Has a 10% chance to confuse the target.
+325,Shadow Punch,Ghost,60,,20,0,Physical,Never misses.
+326,Extrasensory,Psychic,80,100,20,0,Special,Has a 10% chance to make the target flinch.
+327,Sky Uppercut,Fighting,85,90,15,0,Physical,Inflicts regular damage and can hit Bounce and Fly users.
+328,Sand Tomb,Ground,35,85,15,0,Physical,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+330,Muddy Water,Water,90,85,10,0,Special,Has a 30% chance to lower the target’s accuracy by one stage.
+331,Bullet Seed,Grass,25,100,30,0,Physical,Hits 2-5 times in one turn.
+332,Aerial Ace,Flying,60,,20,0,Physical,Never misses.
+333,Icicle Spear,Ice,25,100,30,0,Physical,Hits 2-5 times in one turn.
+337,Dragon Claw,Dragon,80,100,15,0,Physical,Inflicts regular damage with no additional effect.
+338,Frenzy Plant,Grass,150,90,5,0,Special,User foregoes its next turn to recharge.
+340,Bounce,Flying,85,85,5,0,Physical,"User bounces high into the air, dodging all attacks, and hits next turn."
+341,Mud Shot,Ground,55,95,15,0,Special,Has a 100% chance to lower the target’s Speed by one stage.
+342,Poison Tail,Poison,50,100,25,0,Physical,Has an increased chance for a critical hit and a 10% chance to poison the target.
+343,Covet,Normal,60,100,25,0,Physical,Takes the target’s item.
+344,Volt Tackle,Electric,120,100,15,0,Physical,User takes 1/3 the damage inflicted in recoil. Has a 10% chance to paralyze the target.
+345,Magical Leaf,Grass,60,,20,0,Special,Never misses.
+348,Leaf Blade,Grass,90,100,15,0,Physical,Has an increased chance for a critical hit.
+350,Rock Blast,Rock,25,90,10,0,Physical,Hits 2-5 times in one turn.
+351,Shock Wave,Electric,60,,20,0,Special,Never misses.
+352,Water Pulse,Water,60,100,20,0,Special,Has a 20% chance to confuse the target.
+353,Doom Desire,Steel,140,100,5,0,Special,Hits the target two turns later.
+354,Psycho Boost,Psychic,140,90,5,0,Special,Lowers the user’s Special Attack by two stages after inflicting damage.
+358,Wake-Up Slap,Fighting,70,100,10,0,Physical,"If the target is asleep, has double power and wakes it up."
+359,Hammer Arm,Fighting,100,90,10,0,Physical,Lowers user’s Speed by one stage.
+362,Brine,Water,65,100,10,0,Special,Has double power against Pokémon that have less than half their max HP remaining.
+364,Feint,Normal,30,100,10,2,Physical,Hits through Protect and Detect.
+365,Pluck,Flying,60,100,20,0,Physical,"If target has a berry, inflicts double damage and uses the berry."
+369,U-turn,Bug,70,100,20,0,Physical,User must switch out after attacking.
+370,Close Combat,Fighting,120,100,5,0,Physical,Lowers the user’s Defense and Special Defense by one stage after inflicting damage.
+371,Payback,Dark,50,100,10,0,Physical,Power is doubled if the target has already moved this turn.
+372,Assurance,Dark,60,100,10,0,Physical,Power is doubled if the target has already received damage this turn.
+387,Last Resort,Normal,140,100,5,0,Physical,Can only be used after all of the user’s other moves have been used.
+389,Sucker Punch,Dark,70,100,5,1,Physical,Only works if the target is about to use a damaging move.
+394,Flare Blitz,Fire,120,100,15,0,Physical,User takes 1/3 the damage inflicted in recoil. Has a 10% chance to burn the target.
+395,Force Palm,Fighting,60,100,10,0,Physical,Has a 30% chance to paralyze the target.
+396,Aura Sphere,Fighting,80,,20,0,Special,Never misses.
+398,Poison Jab,Poison,80,100,20,0,Physical,Has a 30% chance to poison the target.
+399,Dark Pulse,Dark,80,100,15,0,Special,Has a 20% chance to make the target flinch.
+400,Night Slash,Dark,70,100,15,0,Physical,Has an increased chance for a critical hit.
+401,Aqua Tail,Water,90,90,10,0,Physical,Inflicts regular damage with no additional effect.
+402,Seed Bomb,Grass,80,100,15,0,Physical,Inflicts regular damage with no additional effect.
+403,Air Slash,Flying,75,95,15,0,Special,Has a 30% chance to make the target flinch.
+404,X-Scissor,Bug,80,100,15,0,Physical,Inflicts regular damage with no additional effect.
+405,Bug Buzz,Bug,90,100,10,0,Special,Has a 10% chance to lower the target’s Special Defense by one stage.
+406,Dragon Pulse,Dragon,85,100,10,0,Special,Inflicts regular damage with no additional effect.
+407,Dragon Rush,Dragon,100,75,10,0,Physical,Has a 20% chance to make the target flinch.
+408,Power Gem,Rock,80,100,20,0,Special,Inflicts regular damage with no additional effect.
+409,Drain Punch,Fighting,75,100,10,0,Physical,Drains half the damage inflicted to heal the user.
+410,Vacuum Wave,Fighting,40,100,30,1,Special,Inflicts regular damage with no additional effect.
+411,Focus Blast,Fighting,120,70,5,0,Special,Has a 10% chance to lower the target’s Special Defense by one stage.
+412,Energy Ball,Grass,90,100,10,0,Special,Has a 10% chance to lower the target’s Special Defense by one stage.
+413,Brave Bird,Flying,120,100,15,0,Physical,User receives 1/3 the damage inflicted in recoil.
+414,Earth Power,Ground,90,100,10,0,Special,Has a 10% chance to lower the target’s Special Defense by one stage.
+416,Giga Impact,Normal,150,90,5,0,Physical,User foregoes its next turn to recharge.
+418,Bullet Punch,Steel,40,100,30,1,Physical,Inflicts regular damage with no additional effect.
+419,Avalanche,Ice,60,100,10,-4,Physical,Inflicts double damage if the user takes damage before attacking this turn.
+420,Ice Shard,Ice,40,100,30,1,Physical,Inflicts regular damage with no additional effect.
+421,Shadow Claw,Ghost,70,100,15,0,Physical,Has an increased chance for a critical hit.
+422,Thunder Fang,Electric,65,95,15,0,Physical,Has a 10% chance to paralyze the target and a 10% chance to make the target flinch.
+423,Ice Fang,Ice,65,95,15,0,Physical,Has a 10% chance to freeze the target and a 10% chance to make the target flinch.
+424,Fire Fang,Fire,65,95,15,0,Physical,Has a 10% chance to burn the target and a 10% chance to make the target flinch.
+425,Shadow Sneak,Ghost,40,100,30,1,Physical,Inflicts regular damage with no additional effect.
+426,Mud Bomb,Ground,65,85,10,0,Special,Has a 30% chance to lower the target’s accuracy by one stage.
+427,Psycho Cut,Psychic,70,100,20,0,Physical,Has an increased chance for a critical hit.
+428,Zen Headbutt,Psychic,80,90,15,0,Physical,Has a 20% chance to make the target flinch.
+429,Mirror Shot,Steel,65,85,10,0,Special,Has a 30% chance to lower the target’s accuracy by one stage.
+430,Flash Cannon,Steel,80,100,10,0,Special,Has a 10% chance to lower the target’s Special Defense by one stage.
+431,Rock Climb,Normal,90,85,20,0,Physical,Has a 20% chance to confuse the target.
+434,Draco Meteor,Dragon,130,90,5,0,Special,Lowers the user’s Special Attack by two stages after inflicting damage.
+435,Discharge,Electric,80,100,15,0,Special,Has a 30% chance to paralyze the target.
+436,Lava Plume,Fire,80,100,15,0,Special,Has a 30% chance to burn the target.
+437,Leaf Storm,Grass,130,90,5,0,Special,Lowers the user’s Special Attack by two stages after inflicting damage.
+438,Power Whip,Grass,120,85,10,0,Physical,Inflicts regular damage with no additional effect.
+439,Rock Wrecker,Rock,150,90,5,0,Physical,User foregoes its next turn to recharge.
+440,Cross Poison,Poison,70,100,20,0,Physical,Has an increased chance for a critical hit and a 10% chance to poison the target.
+441,Gunk Shot,Poison,120,80,5,0,Physical,Has a 30% chance to poison the target.
+442,Iron Head,Steel,80,100,15,0,Physical,Has a 30% chance to make the target flinch.
+443,Magnet Bomb,Steel,60,,20,0,Physical,Never misses.
+444,Stone Edge,Rock,100,80,5,0,Physical,Has an increased chance for a critical hit.
+448,Chatter,Flying,65,100,20,0,Special,Has a higher chance to confuse the target when the recorded sound is louder.
+449,Judgment,Normal,100,100,10,0,Special,"If the user is holding a appropriate plate or drive, the damage inflicted will match it."
+450,Bug Bite,Bug,60,100,20,0,Physical,"If target has a berry, inflicts double damage and uses the berry."
+451,Charge Beam,Electric,50,90,10,0,Special,Has a 70% chance to raise the user’s Special Attack by one stage.
+452,Wood Hammer,Grass,120,100,15,0,Physical,User receives 1/3 the damage inflicted in recoil.
+453,Aqua Jet,Water,40,100,20,1,Physical,Inflicts regular damage with no additional effect.
+454,Attack Order,Bug,90,100,15,0,Physical,Has an increased chance for a critical hit.
+457,Head Smash,Rock,150,80,5,0,Physical,User receives 1/2 the damage inflicted in recoil.
+458,Double Hit,Normal,35,90,10,0,Physical,Hits twice in one turn.
+459,Roar of Time,Dragon,150,90,5,0,Special,User foregoes its next turn to recharge.
+460,Spacial Rend,Dragon,100,95,5,0,Special,Has an increased chance for a critical hit.
+463,Magma Storm,Fire,100,75,5,0,Special,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+465,Seed Flare,Grass,120,85,5,0,Special,Has a 40% chance to lower the target’s Special Defense by two stages.
+466,Ominous Wind,Ghost,60,100,5,0,Special,Has a 10% chance to raise all of the user’s stats by one stage.
+467,Shadow Force,Ghost,120,100,5,0,Physical,"User vanishes, dodging all attacks, and hits next turn. Hits through Protect and Detect."
+473,Psyshock,Psychic,80,100,10,0,Special,"Inflicts damage based on the target’s Defense, not Special Defense."
+474,Venoshock,Poison,65,100,10,0,Special,Inflicts double damage if the target is Poisoned.
+479,Smack Down,Rock,50,100,15,0,Physical,Removes any immunity to Ground damage.
+480,Storm Throw,Fighting,60,100,10,0,Physical,Always scores a critical hit.
+481,Flame Burst,Fire,70,100,15,0,Special,Deals splash damage to Pokémon next to the target.
+482,Sludge Wave,Poison,95,100,10,0,Special,Has a 10% chance to poison the target.
+485,Synchronoise,Psychic,120,100,10,0,Special,Hits any Pokémon that shares a type with the user.
+488,Flame Charge,Fire,50,100,20,0,Physical,Inflicts regular damage. Raises the user’s Speed by one stage.
+490,Low Sweep,Fighting,65,100,20,0,Physical,Lowers the target’s Speed by one stage.
+491,Acid Spray,Poison,40,100,20,0,Special,Lowers the target’s Special Defense by two stages.
+492,Foul Play,Dark,95,100,15,0,Physical,Calculates damage with the target’s attacking stat.
+496,Round,Normal,60,100,15,0,Special,Has double power if it’s used more than once per turn.
+497,Echoed Voice,Normal,40,100,15,0,Special,"Power increases by 100% for each consecutive use by any friendly Pokémon, to a maximum of 200."
+498,Chip Away,Normal,70,100,20,0,Physical,Ignores the target’s stat modifiers.
+499,Clear Smog,Poison,50,,15,0,Special,Removes all of the target’s stat modifiers.
+500,Stored Power,Psychic,20,100,10,0,Special,"Power is higher the more the user’s stats have been raised, to a maximum of 31×."
+503,Scald,Water,80,100,15,0,Special,Has a 30% chance to burn the target.
+506,Hex,Ghost,65,100,10,0,Special,Has double power if the target has a major status ailment.
+507,Sky Drop,Flying,60,100,10,0,Physical,"Carries the target high into the air, dodging all attacks against either, and drops it next turn."
+509,Circle Throw,Fighting,60,90,10,-6,Physical,Ends wild battles. Forces trainers to switch Pokémon.
+510,Incinerate,Fire,60,100,15,0,Special,Destroys the target’s held berry.
+512,Acrobatics,Flying,55,100,15,0,Physical,Has double power if the user has no held item.
+514,Retaliate,Normal,70,100,5,0,Physical,Has double power if a friendly Pokémon fainted last turn.
+517,Inferno,Fire,100,50,5,0,Special,Has a 100% chance to burn the target.
+518,Water Pledge,Water,80,100,10,0,Special,"With Grass Pledge, halves opposing Pokémon’s Speed for four turns."
+519,Fire Pledge,Fire,80,100,10,0,Special,"With Water Pledge, doubles the effect chance of friendly Pokémon’s moves for four turns."
+520,Grass Pledge,Grass,80,100,10,0,Special,"With Fire Pledge, damages opposing Pokémon for 1/8 their max HP every turn for four turns."
+521,Volt Switch,Electric,70,100,20,0,Special,User must switch out after attacking.
+522,Struggle Bug,Bug,50,100,20,0,Special,Has a 100% chance to lower the target’s Special Attack by one stage.
+523,Bulldoze,Ground,60,100,20,0,Physical,Has a 100% chance to lower the target’s Speed by one stage.
+524,Frost Breath,Ice,60,90,10,0,Special,Always scores a critical hit.
+525,Dragon Tail,Dragon,60,90,10,-6,Physical,Ends wild battles. Forces trainers to switch Pokémon.
+527,Electroweb,Electric,55,95,15,0,Special,Lowers the target’s Speed by one stage.
+528,Wild Charge,Electric,90,100,15,0,Physical,User receives 1/4 the damage it inflicts in recoil.
+529,Drill Run,Ground,80,95,10,0,Physical,Has an increased chance for a critical hit.
+530,Dual Chop,Dragon,40,90,15,0,Physical,Hits twice in one turn.
+531,Heart Stamp,Psychic,60,100,25,0,Physical,Has a 30% chance to make the target flinch.
+532,Horn Leech,Grass,75,100,10,0,Physical,Drains half the damage inflicted to heal the user.
+533,Sacred Sword,Fighting,90,100,15,0,Physical,Ignores the target’s stat modifiers.
+534,Razor Shell,Water,75,95,10,0,Physical,Has a 50% chance to lower the target’s Defense by one stage.
+536,Leaf Tornado,Grass,65,90,10,0,Special,Has a 50% chance to lower the target’s accuracy by one stage.
+537,Steamroller,Bug,65,100,20,0,Physical,Has a 30% chance to make the target flinch.
+539,Night Daze,Dark,85,95,10,0,Special,Has a 40% chance to lower the target’s accuracy by one stage.
+540,Psystrike,Psychic,100,100,10,0,Special,"Inflicts damage based on the target’s Defense, not Special Defense."
+541,Tail Slap,Normal,25,85,10,0,Physical,Hits 2-5 times in one turn.
+542,Hurricane,Flying,110,70,10,0,Special,Has a 30% chance to confuse the target.
+543,Head Charge,Normal,120,100,15,0,Physical,User receives 1/4 the damage it inflicts in recoil.
+544,Gear Grind,Steel,50,85,15,0,Physical,Hits twice in one turn.
+545,Searing Shot,Fire,100,100,5,0,Special,Has a 30% chance to burn the target.
+546,Techno Blast,Normal,120,100,5,0,Special,"If the user is holding a appropriate plate or drive, the damage inflicted will match it."
+547,Relic Song,Normal,75,100,10,0,Special,Has a 10% chance to put the target to sleep.
+548,Secret Sword,Fighting,85,100,10,0,Special,"Inflicts damage based on the target’s Defense, not Special Defense."
+549,Glaciate,Ice,65,95,10,0,Special,Lowers the target’s Speed by one stage.
+550,Bolt Strike,Electric,130,85,5,0,Physical,Has a 20% chance to paralyze the target.
+551,Blue Flare,Fire,130,85,5,0,Special,Has a 20% chance to burn the target.
+552,Fiery Dance,Fire,80,100,10,0,Special,Has a 50% chance to raise the user’s Special Attack by one stage.
+553,Freeze Shock,Ice,140,90,5,0,Physical,Requires a turn to charge before attacking. Has a 30% chance to paralyze the target.
+554,Ice Burn,Ice,140,90,5,0,Special,Requires a turn to charge before attacking. Has a 30% chance to burn the target.
+555,Snarl,Dark,55,95,15,0,Special,Has a 100% chance to lower the target’s Special Attack by one stage.
+556,Icicle Crash,Ice,85,90,10,0,Physical,Has a 30% chance to make the target flinch.
+557,V-create,Fire,180,95,5,0,Physical,"Lowers the user’s Defense, Special Defense, and Speed by one stage each."
+558,Fusion Flare,Fire,100,100,5,0,Special,"With Fusion Bolt, inflicts double damage."
+559,Fusion Bolt,Electric,100,100,5,0,Physical,"With Fusion Flare, inflicts double damage."
+560,Flying Press,Fighting,100,95,10,0,Physical,Deals both []{type:fighting} and []{type:flying}-type damage.
+562,Belch,Poison,120,90,10,0,Special,Can only be used after the user has eaten a berry.
+565,Fell Stinger,Bug,50,100,25,0,Physical,Raises the user’s Attack by two stages if it KOs the target.
+566,Phantom Force,Ghost,90,100,10,0,Physical,"User vanishes, dodging all attacks, and hits next turn. Hits through Protect and Detect."
+570,Parabolic Charge,Electric,65,100,20,0,Special,Heals the user for half the total damage dealt to all targets.
+572,Petal Blizzard,Grass,90,100,15,0,Physical,Inflicts regular damage.
+573,Freeze-Dry,Ice,70,100,20,0,Special,Super-effective against []{type:water}.
+574,Disarming Voice,Fairy,40,,15,0,Special,Never misses.
+577,Draining Kiss,Fairy,50,100,10,0,Special,Drains 75% of the damage inflicted to heal the user.
+583,Play Rough,Fairy,90,90,10,0,Physical,Has a 10% chance to lower the target’s Attack by one stage.
+584,Fairy Wind,Fairy,40,100,30,0,Special,Inflicts regular damage with no additional effect.
+585,Moonblast,Fairy,95,100,15,0,Special,Has a 30% chance to lower the target’s Special Attack by one stage.
+586,Boomburst,Normal,140,100,10,0,Special,Inflicts regular damage.
+591,Diamond Storm,Rock,100,95,5,0,Physical,Has a 50% chance to raise the user’s Defense by two stages for each target hit.
+592,Steam Eruption,Water,110,95,5,0,Special,Has a 30% chance to burn the target.
+593,Hyperspace Hole,Psychic,80,,5,0,Special,Ignores and destroys protection effects.
+594,Water Shuriken,Water,15,100,20,1,Special,Hits 2–5 times.
+595,Mystical Fire,Fire,75,100,10,0,Special,Has a 100% chance to lower the target’s Special Attack by one stage.
+605,Dazzling Gleam,Fairy,80,100,10,0,Special,Inflicts regular damage with no additional effect.
+609,Nuzzle,Electric,20,100,20,0,Physical,Has a 100% chance to paralyze the target.
+610,Hold Back,Normal,40,100,40,0,Physical,Cannot lower the target’s HP below 1.
+611,Infestation,Bug,20,100,20,0,Special,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+612,Power-Up Punch,Fighting,40,100,20,0,Physical,Raises the user’s Attack by one stage after inflicting damage.
+613,Oblivion Wing,Flying,80,100,10,0,Special,Drains 75% of the damage inflicted to heal the user.
+614,Thousand Arrows,Ground,90,100,10,0,Physical,"Grounds the target, and hits even Flying-type or levitating Pokémon."
+615,Thousand Waves,Ground,90,100,10,0,Physical,Prevents the target from leaving battle.
+616,Land’s Wrath,Ground,90,100,10,0,Physical,Inflicts regular damage with no additional effect.
+617,Light of Ruin,Fairy,140,90,5,0,Special,User receives 1/2 the damage inflicted in recoil.
+618,Origin Pulse,Water,110,85,10,0,Special,Inflicts regular damage with no additional effect.
+619,Precipice Blades,Ground,120,85,10,0,Physical,Inflicts regular damage with no additional effect.
+620,Dragon Ascent,Flying,120,100,5,0,Physical,Lowers the user’s Defense and Special Defense by one stage after inflicting damage.
+621,Hyperspace Fury,Dark,100,,5,0,Physical,Ignores and destroys protection effects.
+658,Catastropika,Electric,210,,1,0,Physical,Inflicts regular damage with no additional effect.
+660,First Impression,Bug,90,100,10,2,Physical,Can only be used as the first move after the user enters battle.
+662,Spirit Shackle,Ghost,80,100,10,0,Physical,Traps the target.
+663,Darkest Lariat,Dark,85,100,10,0,Physical,Ignores the target’s stat modifiers.
+664,Sparkling Aria,Water,90,100,10,0,Special,Cures the target of burns.
+665,Ice Hammer,Ice,100,90,10,0,Physical,Lowers user’s Speed by one stage.
+667,High Horsepower,Ground,95,95,10,0,Physical,Inflicts regular damage with no additional effect.
+669,Solar Blade,Grass,125,100,10,0,Physical,Requires a turn to charge before attacking.
+670,Leafage,Grass,40,100,40,0,Physical,Inflicts regular damage with no additional effect.
+675,Throat Chop,Dark,80,100,15,0,Physical,Prevents the target from using sound-based moves for two turns.
+676,Pollen Puff,Bug,90,100,15,0,Special,"Damages opponents, but heals allies for 50% of their max HP."
+677,Anchor Shot,Steel,80,100,20,0,Physical,Traps the target.
+679,Lunge,Bug,80,100,15,0,Physical,Lowers the target’s Attack by one stage after inflicting damage.
+680,Fire Lash,Fire,80,100,15,0,Physical,Lowers the target’s Defense by one stage after inflicting damage.
+681,Power Trip,Dark,20,100,10,0,Physical,"Power is higher the more the user’s stats have been raised, to a maximum of 31×."
+682,Burn Up,Fire,130,100,5,0,Special,Removes the user’s []{type:fire} type after inflicting damage.
+684,Smart Strike,Steel,70,,10,0,Physical,Never misses.
+686,Revelation Dance,Normal,90,100,15,0,Special,Has the same type as the user.
+687,Core Enforcer,Dragon,100,100,10,0,Special,Nullifies the target’s ability if it moves earlier.
+688,Trop Kick,Grass,70,100,15,0,Physical,Lowers the target’s Attack by one stage after inflicting damage.
+690,Beak Blast,Flying,100,100,15,-3,Physical,Inflicts a burn on any Pokémon that makes contact before the attack.
+691,Clanging Scales,Dragon,110,100,5,0,Special,Lowers the user’s Defense by one stage after inflicting damage.
+692,Dragon Hammer,Dragon,90,100,15,0,Physical,Inflicts regular damage with no additional effect.
+693,Brutal Swing,Dark,60,100,20,0,Physical,Inflicts regular damage with no additional effect.
+695,Sinister Arrow Raid,Ghost,180,,1,0,Physical,Inflicts regular damage with no additional effect.
+696,Malicious Moonsault,Dark,180,,1,0,Physical,Inflicts regular damage with no additional effect.
+697,Oceanic Operetta,Water,195,,1,0,Special,Inflicts regular damage with no additional effect.
+699,Soul-Stealing 7-Star Strike,Ghost,195,,1,0,Physical,Inflicts regular damage with no additional effect.
+700,Stoked Sparksurfer,Electric,175,,1,0,Special,Has a 100% chance to paralyze the target.
+701,Pulverizing Pancake,Normal,210,,1,0,Physical,Inflicts regular damage with no additional effect.
+703,Genesis Supernova,Psychic,185,,1,0,Special,Changes the terrain to Psychic Terrain after inflicting damage.
+704,Shell Trap,Fire,150,100,5,-3,Special,Only inflicts damage if the user was hit by a physical move this turn.
+705,Fleur Cannon,Fairy,130,90,5,0,Special,Lowers the user’s Special Attack by two stages after inflicting damage.
+706,Psychic Fangs,Psychic,85,100,10,0,Physical,Destroys Reflect and Light Screen.
+707,Stomping Tantrum,Ground,75,100,10,0,Physical,Has double power if the user’s last move failed.
+708,Shadow Bone,Ghost,85,100,10,0,Physical,Has a 20% chance to lower the target’s Defense by one stage.
+709,Accelerock,Rock,40,100,20,1,Physical,Inflicts regular damage with no additional effect.
+710,Liquidation,Water,85,100,10,0,Physical,Has a 20% chance to lower the target’s Defense by one stage.
+711,Prismatic Laser,Psychic,160,100,10,0,Special,User foregoes its next turn to recharge.
+712,Spectral Thief,Ghost,90,100,10,0,Physical,"Steals the target’s stat increases, then inflicts damage."
+713,Sunsteel Strike,Steel,100,100,5,0,Physical,Cannot be disrupted by abilities.
+714,Moongeist Beam,Ghost,100,100,5,0,Special,Cannot be disrupted by abilities.
+716,Zing Zap,Electric,80,100,10,0,Physical,Has a 30% chance to make the target flinch.
+718,Multi-Attack,Normal,120,100,10,0,Physical,"If the user is holding a appropriate plate or drive, the damage inflicted will match it."
+719,"10,000,000 Volt Thunderbolt",Electric,195,,1,0,Special,Inflicts regular damage with no additional effect.
+720,Mind Blown,Fire,150,100,5,0,Special,"Inflicts damage, and the user takes damage equal to half of its max HP, rounded up."
+721,Plasma Fists,Electric,100,100,15,0,Physical,"After inflicting damage, causes all Normal-type moves to become Electric-type for the remainder of the turn."
+722,Photon Geyser,Psychic,100,100,5,0,Special,Inflicts regular damage with no additional effect.
+723,Light That Burns the Sky,Psychic,200,,1,0,Special,"Inflicts damage using either Attack or Special Attack stat, whichever is higher."
+724,Searing Sunraze Smash,Steel,200,,1,0,Physical,Cannot be disrupted by abilities.
+725,Menacing Moonraze Maelstrom,Ghost,200,,1,0,Special,Cannot be disrupted by abilities.
+726,Let’s Snuggle Forever,Fairy,190,,1,0,Physical,Inflicts regular damage with no additional effect.
+727,Splintered Stormshards,Rock,190,,1,0,Physical,Inflicts damage and removes any terrain present on the battlefield.
+728,Clangorous Soulblaze,Dragon,185,,1,0,Special,"Inflicts damage to all opposing Pokémon and increases the user’s Attack, Defense, Special Attack, Special Defense, and Speed by one stage each."
+729,Zippy Zap,Electric,80,100,10,2,Physical,Inflicts regular damage with no additional effect.
+730,Splishy Splash,Water,90,100,15,0,Special,Inflicts regular damage with no additional effect.
+731,Floaty Fall,Flying,90,95,15,0,Physical,Inflicts regular damage with no additional effect.
+733,Bouncy Bubble,Water,60,100,20,0,Special,Inflicts regular damage with no additional effect.
+734,Buzzy Buzz,Electric,60,100,20,0,Special,Inflicts regular damage with no additional effect.
+735,Sizzly Slide,Fire,60,100,20,0,Physical,Inflicts regular damage with no additional effect.
+736,Glitzy Glow,Psychic,80,95,15,0,Special,Inflicts regular damage with no additional effect.
+737,Baddy Bad,Dark,80,95,15,0,Special,Inflicts regular damage with no additional effect.
+738,Sappy Seed,Grass,100,90,10,0,Physical,Inflicts regular damage with no additional effect.
+739,Freezy Frost,Ice,100,90,10,0,Special,Inflicts regular damage with no additional effect.
+740,Sparkly Swirl,Fairy,120,85,5,0,Special,Inflicts regular damage with no additional effect.
+742,Double Iron Bash,Steel,60,100,5,0,Physical,Hits twice in one turn.
+744,Dynamax Cannon,Dragon,100,100,5,0,Special,Sets Light Screen on the user’s side of the field after inflicting damage.
+745,Snipe Shot,Water,80,100,15,0,Special,Sets Reflect on the user’s side of the field after inflicting damage.
+746,Jaw Lock,Dark,80,100,10,0,Physical,Seeds the target after inflicting damage.
+751,Dragon Darts,Dragon,50,100,10,0,Physical,
+754,Bolt Beak,Electric,85,100,10,0,Physical,
+755,Fishious Rend,Water,85,100,10,0,Physical,
+757,Max Flare,Fire,100,,10,0,Physical,Inflicts regular damage with no additional effect.
+758,Max Flutterby,Bug,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+759,Max Lightning,Electric,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+760,Max Strike,Normal,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+761,Max Knuckle,Fighting,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+762,Max Phantasm,Ghost,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+763,Max Hailstorm,Ice,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+764,Max Ooze,Poison,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+765,Max Geyser,Water,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+766,Max Airstream,Flying,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+767,Max Starfall,Fairy,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+768,Max Wyrmwind,Dragon,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+769,Max Mindstorm,Psychic,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+770,Max Rockfall,Rock,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+771,Max Quake,Ground,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+772,Max Darkness,Dark,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+773,Max Overgrowth,Grass,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+774,Max Steelspike,Steel,10,,10,0,Physical,Inflicts regular damage with no additional effect.
+776,Body Press,Fighting,80,100,10,0,Physical,
+778,Drum Beating,Grass,80,100,10,0,Physical,Has a 100% chance to lower the target’s Speed by one stage.
+779,Snap Trap,Grass,35,100,15,0,Physical,Prevents the target from fleeing and inflicts damage for 2-5 turns.
+780,Pyro Ball,Fire,120,90,5,0,Physical,Has a 10% chance to burn the target.
+781,Behemoth Blade,Steel,100,100,5,0,Physical,
+782,Behemoth Bash,Steel,100,100,5,0,Physical,
+783,Aura Wheel,Electric,110,100,10,0,Physical,
+784,Breaking Swipe,Dragon,60,100,15,0,Physical,Lowers the target’s Attack by one stage after inflicting damage.
+785,Branch Poke,Grass,40,100,40,0,Physical,Inflicts regular damage with no additional effect.
+786,Overdrive,Electric,80,100,10,0,Special,
+787,Apple Acid,Grass,80,100,10,0,Special,
+788,Grav Apple,Grass,80,100,10,0,Physical,Lowers the target’s Defense by one stage after inflicting damage.
+789,Spirit Break,Fairy,75,100,15,0,Physical,Has a 100% chance to lower the target’s Special Attack by one stage.
+790,Strange Steam,Fairy,90,95,10,0,Special,Has a 20% chance to confuse the target.
+793,False Surrender,Dark,80,,10,0,Physical,Never misses.
+794,Meteor Assault,Fighting,150,100,5,0,Physical,User foregoes its next turn to recharge.
+795,Eternabeam,Dragon,160,90,5,0,Special,User foregoes its next turn to recharge.
+796,Steel Beam,Steel,140,95,5,0,Special,"Inflicts damage, and the user takes damage equal to half of its max HP, rounded up."
+797,Expanding Force,Psychic,80,100,10,0,Special,Inflicts regular damage with no additional effect.
+798,Steel Roller,Steel,130,100,5,0,Physical,Inflicts regular damage with no additional effect.
+799,Scale Shot,Dragon,25,90,20,0,Physical,Boosts the user’s Speed and lowers their Defense by one stage after inflicting damage two to five times in a row.
+800,Meteor Beam,Rock,120,90,10,0,Special,Inflicts regular damage with no additional effect.
+801,Shell Side Arm,Poison,90,100,10,0,Special,Inflicts regular damage with no additional effect.
+802,Misty Explosion,Fairy,100,100,5,0,Special,Inflicts regular damage with no additional effect.
+803,Grassy Glide,Grass,55,100,20,0,Physical,Inflicts regular damage with no additional effect.
+804,Rising Voltage,Electric,70,100,20,0,Special,Inflicts regular damage with no additional effect.
+805,Terrain Pulse,Normal,50,100,10,0,Special,Inflicts regular damage with no additional effect.
+806,Skitter Smack,Bug,70,90,10,0,Physical,Inflicts regular damage with no additional effect.
+807,Burning Jealousy,Fire,70,100,5,0,Special,Inflicts regular damage with no additional effect.
+808,Lash Out,Dark,75,100,5,0,Physical,Inflicts regular damage with no additional effect.
+809,Poltergeist,Ghost,110,90,5,0,Physical,Inflicts regular damage with no additional effect.
+812,Flip Turn,Water,60,100,20,0,Physical,Inflicts regular damage with no additional effect.
+813,Triple Axel,Ice,20,90,10,0,Physical,Inflicts regular damage with no additional effect.
+814,Dual Wingbeat,Flying,40,90,10,0,Physical,Inflicts regular damage with no additional effect.
+815,Scorching Sands,Ground,70,100,10,0,Special,Has a 30% chance to burn the target.
+817,Wicked Blow,Dark,75,100,5,0,Physical,Inflicts regular damage with no additional effect.
+818,Surging Strikes,Water,25,100,5,0,Physical,Inflicts regular damage with no additional effect.
+819,Thunder Cage,Electric,80,90,15,0,Special,Inflicts regular damage with no additional effect.
+820,Dragon Energy,Dragon,150,100,5,0,Special,Inflicts regular damage with no additional effect.
+821,Freezing Glare,Psychic,90,100,10,0,Special,Inflicts regular damage with no additional effect.
+822,Fiery Wrath,Dark,90,100,10,0,Special,Inflicts regular damage with no additional effect.
+823,Thunderous Kick,Fighting,90,100,10,0,Physical,Inflicts regular damage with no additional effect.
+824,Glacial Lance,Ice,120,100,5,0,Physical,Inflicts regular damage with no additional effect.
+825,Astral Barrage,Ghost,120,100,5,0,Special,Inflicts regular damage with no additional effect.
+826,Eerie Spell,Psychic,80,100,5,0,Special,Inflicts regular damage with no additional effect.
+827,Dire Claw,Poison,80,100,15,0,Physical,
+828,Psyshield Bash,Psychic,70,90,10,0,Physical,
+830,Stone Axe,Rock,65,90,15,0,Physical,
+831,Springtide Storm,Fairy,100,80,5,0,Special,
+832,Mystical Power,Psychic,70,90,10,0,Special,
+833,Raging Fury,Fire,120,100,10,0,Physical,
+834,Wave Crash,Water,120,100,10,0,Physical,
+835,Chloroblast,Grass,150,95,5,0,Special,
+836,Mountain Gale,Ice,100,85,10,0,Physical,
+838,Headlong Rush,Ground,120,100,5,0,Physical,
+839,Barb Barrage,Poison,60,100,10,0,Physical,
+840,Esper Wing,Psychic,80,100,10,0,Special,
+841,Bitter Malice,Ghost,75,100,10,0,Special,
+843,Triple Arrows,Fighting,90,100,10,0,Physical,
+844,Infernal Parade,Ghost,60,100,15,0,Special,
+845,Ceaseless Edge,Dark,65,90,15,0,Physical,
+846,Bleakwind Storm,Flying,100,80,10,0,Special,
+847,Wildbolt Storm,Electric,100,80,10,0,Special,
+848,Sandsear Storm,Ground,100,80,10,0,Special,
+851,Tera Blast,Normal,80,100,10,0,Special,
+853,Axe Kick,Fighting,120,90,10,0,Physical,
+854,Last Respects,Ghost,50,100,10,0,Physical,
+855,Lumina Crash,Psychic,80,100,10,0,Special,
+856,Order Up,Dragon,80,100,10,0,Physical,
+857,Jet Punch,Water,60,100,15,1,Physical,
+859,Spin Out,Steel,100,100,5,0,Physical,
+860,Population Bomb,Normal,20,90,10,0,Physical,
+861,Ice Spinner,Ice,80,100,15,0,Physical,
+862,Glaive Rush,Dragon,120,100,5,0,Physical,
+864,Salt Cure,Rock,40,100,15,0,Physical,
+865,Triple Dive,Water,30,95,10,0,Physical,
+866,Mortal Spin,Poison,30,100,15,0,Physical,
+869,Kowtow Cleave,Dark,85,,10,0,Physical,
+870,Flower Trick,Grass,70,,10,0,Physical,
+871,Torch Song,Fire,80,100,10,0,Special,
+872,Aqua Step,Water,80,100,10,0,Physical,
+873,Raging Bull,Normal,90,100,10,0,Physical,
+874,Make It Rain,Steel,120,100,5,0,Special,
+875,Psyblade,Psychic,80,100,15,0,Physical,
+876,Hydro Steam,Water,80,100,15,0,Special,
+877,Ruination,Dark,1,90,10,0,Special,
+878,Collision Course,Fighting,100,100,5,0,Physical,
+879,Electro Drift,Electric,100,100,5,0,Special,
+884,Pounce,Bug,50,100,20,0,Physical,
+885,Trailblaze,Grass,50,100,20,0,Physical,
+886,Chilling Water,Water,50,100,20,0,Special,
+887,Hyper Drill,Normal,100,100,5,0,Physical,
+888,Twin Beam,Psychic,40,100,10,0,Special,
+889,Rage Fist,Ghost,50,100,10,0,Physical,
+890,Armor Cannon,Fire,120,100,5,0,Special,
+891,Bitter Blade,Fire,90,100,10,0,Physical,
+892,Double Shock,Electric,120,100,5,0,Physical,
+893,Gigaton Hammer,Steel,160,100,5,0,Physical,
+894,Comeuppance,Dark,1,100,10,0,Physical,
+895,Aqua Cutter,Water,70,100,20,0,Physical,
+896,Blazing Torque,Fire,80,100,10,0,Physical,
+897,Wicked Torque,Dark,80,100,10,0,Physical,
+898,Noxious Torque,Poison,100,100,10,0,Physical,
+899,Combat Torque,Fighting,100,100,10,0,Physical,
+900,Magical Torque,Fairy,100,100,10,0,Physical,
+901,Blood Moon,Normal,140,100,5,0,Special,
+902,Matcha Gotcha,Grass,80,90,15,0,Special,
+903,Syrup Bomb,Grass,60,85,10,0,Special,
+904,Ivy Cudgel,Grass,100,100,10,0,Physical,
+905,Electro Shot,Electric,130,100,10,0,Special,
+906,Tera Starstorm,Normal,120,100,5,0,Special,
+907,Fickle Beam,Dragon,80,100,5,0,Special,
+909,Thunderclap,Electric,70,100,5,1,Special,
+910,Mighty Cleave,Rock,95,100,5,0,Physical,
+911,Tachyon Cutter,Steel,50,0,10,0,Special,
+914,Alluring Voice,Fairy,80,100,10,0,Special,
+915,Temper Flare,Fire,75,100,10,0,Physical,
+916,Supercell Slam,Electric,100,95,15,0,Physical,
+917,Psychic Noise,Psychic,75,100,10,0,Special,
+918,Upper Hand,Fighting,65,100,15,3,Physical,
+919,Malignant Chain,Poison,100,100,5,0,Special,
