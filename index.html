@@ -14,16 +14,55 @@
 
     <section id="start-screen" class="screen is-active" aria-labelledby="start-title">
       <div class="panel start-panel">
-        <p class="eyebrow">Random battle mode</p>
+        <p class="eyebrow">Pokemon betting cabinet</p>
         <h1 id="start-title">Pokemon Battle Simulator</h1>
         <p class="lead">
-          Start with 100 Pokedollars, spin for a random Pokemon, place a bet on the match, and keep the run alive
-          until you cash out or go broke.
+          Spin for a random fighter, study the matchup, wager your Pokedollars, and watch the battle machine resolve
+          the fight automatically.
         </p>
-        <div class="hero-sprite-frame">
-          <img id="start-pikachu" alt="Pikachu preview sprite" class="pixel-art hero-sprite">
+
+        <div class="hero-layout">
+          <div class="hero-sprite-frame">
+            <img id="start-pikachu" alt="Pikachu preview sprite" class="pixel-art hero-sprite">
+          </div>
+
+          <div class="hero-copy">
+            <div class="feature-grid">
+              <article class="feature-card">
+                <span class="feature-kicker">Watch</span>
+                <strong>Auto-resolved battles with live HP updates.</strong>
+              </article>
+              <article class="feature-card">
+                <span class="feature-kicker">Wager</span>
+                <strong>Back your side and grow a 100 Pokedollar bankroll.</strong>
+              </article>
+              <article class="feature-card">
+                <span class="feature-kicker">Track</span>
+                <strong>Follow predictions, streaks, wins, and bankroll highs.</strong>
+              </article>
+            </div>
+
+            <div class="start-steps">
+              <p class="field-label">How It Works</p>
+              <div class="steps-grid">
+                <div class="step-card">
+                  <span class="step-index">1</span>
+                  <p>Roulette locks in your Pokemon for the round.</p>
+                </div>
+                <div class="step-card">
+                  <span class="step-index">2</span>
+                  <p>Review the matchup, pick a side, and set your bet.</p>
+                </div>
+                <div class="step-card">
+                  <span class="step-index">3</span>
+                  <p>Watch the auto battle, then spin the next matchup or cash out.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <button id="start-run-button" class="app-button" type="button" disabled>Start</button>
+
+        <button id="start-run-button" class="app-button" type="button" disabled>Start Run</button>
       </div>
     </section>
 
@@ -36,6 +75,7 @@
             <strong id="roulette-wallet-amount">100</strong>
           </div>
         </div>
+        <p class="eyebrow">Round setup</p>
         <h2 id="roulette-title">Pokemon Roulette</h2>
         <p id="roulette-hint" class="subhead">Spinning to choose your Pokemon...</p>
         <div class="roulette-board" aria-live="polite">
@@ -74,27 +114,69 @@
           </div>
         </div>
         <p id="roulette-result" class="roulette-result"></p>
+        <p class="roulette-note">Once the spin stops, that matchup is your live round.</p>
       </div>
     </section>
 
     <section id="game-screen" class="screen" aria-labelledby="toolbar-title">
       <div class="toolbar panel">
-        <div class="toolbar-title-group">
-          <h2 id="toolbar-title">Random Pokemon Battle</h2>
-          <p id="matchup-label" class="toolbar-matchup">Loading random matchup...</p>
+        <div class="toolbar-overview">
+          <div class="toolbar-title-group">
+            <p class="eyebrow small">Spectator betting mode</p>
+            <h2 id="toolbar-title">Random Pokemon Battle</h2>
+            <p id="matchup-label" class="toolbar-matchup">Loading random matchup...</p>
+          </div>
+
+          <div class="toolbar-status-stack">
+            <div class="wallet-pill">
+              <img src="assets/icons/pokedollar.svg" alt="" class="wallet-icon">
+              <span>Wallet</span>
+              <strong id="wallet-amount">100</strong>
+            </div>
+
+            <div id="battle-state-card" class="state-pill">
+              <span>Cabinet State</span>
+              <strong id="battle-state-label">Idle</strong>
+            </div>
+          </div>
         </div>
-        <div class="wallet-pill">
-          <img src="assets/icons/pokedollar.svg" alt="" class="wallet-icon">
-          <span>Wallet</span>
-          <strong id="wallet-amount">100</strong>
+
+        <div class="hud-strip" aria-label="Run statistics">
+          <div class="hud-stat">
+            <span class="hud-label">Round</span>
+            <strong id="hud-round" class="hud-value">1</strong>
+          </div>
+          <div class="hud-stat">
+            <span class="hud-label">Wins</span>
+            <strong id="hud-wins" class="hud-value">0</strong>
+          </div>
+          <div class="hud-stat">
+            <span class="hud-label">Correct Bets</span>
+            <strong id="hud-bets" class="hud-value">0</strong>
+          </div>
+          <div class="hud-stat">
+            <span class="hud-label">Hot Streak</span>
+            <strong id="hud-streak" class="hud-value">0</strong>
+          </div>
         </div>
-        <button id="random-matchup-button" class="app-button" type="button">Random Matchup</button>
-        <button id="start-battle-button" class="app-button" type="button" disabled>Start Battle</button>
-        <button id="cash-out-button" class="app-button secondary" type="button">Cash Out</button>
+
+        <div class="toolbar-actions">
+          <button id="random-matchup-button" class="app-button secondary" type="button">Next Matchup</button>
+          <button id="start-battle-button" class="app-button" type="button" disabled>Watch Battle</button>
+          <button id="cash-out-button" class="app-button ghost" type="button">Cash Out</button>
+        </div>
       </div>
 
       <div class="game-grid">
         <div class="panel arena-panel">
+          <div class="arena-header">
+            <div>
+              <p class="eyebrow small">Auto Battle Arena</p>
+              <h3 id="arena-title">Spin a matchup to open the betting desk.</h3>
+            </div>
+            <div class="arena-badge">Hands off, eyes on</div>
+          </div>
+
           <div class="battlefield">
             <div class="versus-text">VS</div>
 
@@ -135,7 +217,85 @@
                 <span id="wallet-inline-amount">100</span>
               </div>
             </div>
-            <p id="prediction-text" class="prediction-text">ML prediction unavailable.</p>
+
+            <p class="panel-intro">
+              Review the matchup, use the machine-learning read, and lock in your wager before the auto battle begins.
+            </p>
+
+            <div class="matchup-cards" aria-label="Matchup preview">
+              <article id="matchup-card-player" class="matchup-card">
+                <div class="matchup-card-top">
+                  <span class="matchup-card-label">Your Pokemon</span>
+                  <img id="preview-player-sprite" alt="" class="pixel-art matchup-card-sprite">
+                </div>
+                <h4 id="preview-player-name" class="matchup-card-name">Waiting for a spin</h4>
+                <div id="preview-player-types" class="type-chip-row"></div>
+                <div class="mini-stat-grid">
+                  <div class="mini-stat">
+                    <span>HP</span>
+                    <strong id="preview-player-hp">0</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>Atk</span>
+                    <strong id="preview-player-attack">0</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>Spd</span>
+                    <strong id="preview-player-speed">0</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>BST</span>
+                    <strong id="preview-player-total">0</strong>
+                  </div>
+                </div>
+              </article>
+
+              <article id="matchup-card-opponent" class="matchup-card">
+                <div class="matchup-card-top">
+                  <span class="matchup-card-label">Opponent</span>
+                  <img id="preview-opponent-sprite" alt="" class="pixel-art matchup-card-sprite">
+                </div>
+                <h4 id="preview-opponent-name" class="matchup-card-name">Waiting for a spin</h4>
+                <div id="preview-opponent-types" class="type-chip-row"></div>
+                <div class="mini-stat-grid">
+                  <div class="mini-stat">
+                    <span>HP</span>
+                    <strong id="preview-opponent-hp">0</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>Atk</span>
+                    <strong id="preview-opponent-attack">0</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>Spd</span>
+                    <strong id="preview-opponent-speed">0</strong>
+                  </div>
+                  <div class="mini-stat">
+                    <span>BST</span>
+                    <strong id="preview-opponent-total">0</strong>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <div class="prediction-panel">
+              <div class="prediction-panel-top">
+                <span class="field-label inline">Prediction Meter</span>
+                <span id="prediction-favored" class="prediction-favored">No matchup loaded</span>
+              </div>
+              <div class="prediction-name-row">
+                <span id="prediction-player-name">Your Pokemon</span>
+                <span id="prediction-opponent-name">Opponent</span>
+              </div>
+              <div class="prediction-bar" aria-hidden="true">
+                <div id="prediction-bar-fill" class="prediction-bar-fill"></div>
+              </div>
+              <div class="prediction-chances">
+                <strong id="prediction-player-chance">50.0%</strong>
+                <strong id="prediction-opponent-chance">50.0%</strong>
+              </div>
+              <p id="prediction-text" class="prediction-text">ML prediction unavailable.</p>
+            </div>
 
             <div class="bet-fieldset">
               <span class="field-label">Bet On</span>
@@ -152,17 +312,29 @@
                 <input id="bet-amount" type="number" min="1" step="1" value="10" inputmode="numeric">
                 <button id="bet-max-button" class="mini-button" type="button">Max</button>
               </div>
+
+              <div class="quick-bet-row" aria-label="Quick bet amounts">
+                <button class="quick-bet-button" type="button" data-bet-amount="10">10</button>
+                <button class="quick-bet-button" type="button" data-bet-amount="25">25</button>
+                <button class="quick-bet-button" type="button" data-bet-amount="50">50</button>
+              </div>
+
               <p id="bet-summary" class="bet-summary">Choose your side and lock in a bet before the battle starts.</p>
             </div>
 
-            <div class="panel-note" id="round-summary">
-              Spin a matchup, set your wager, and press Start Battle to begin the round.
+            <div class="panel-note round-note">
+              <div class="phase-row">
+                <span id="phase-pill" class="phase-pill">Idle</span>
+                <span id="bet-lock-label" class="phase-meta">No active wager</span>
+              </div>
+              <p id="round-summary">Spin a matchup, set your wager, and press Watch Battle to begin the round.</p>
             </div>
           </div>
 
           <div class="panel log-panel">
             <div class="panel-heading">
               <h3>Battle Log</h3>
+              <span class="panel-caption">Play-by-play feed</span>
             </div>
             <div id="battle-log" class="battle-log" aria-live="polite"></div>
           </div>
@@ -182,6 +354,10 @@
             <strong id="summary-wallet" class="summary-value">100</strong>
           </div>
           <div class="summary-stat">
+            <span class="summary-label">Net Change</span>
+            <strong id="summary-net" class="summary-value">0</strong>
+          </div>
+          <div class="summary-stat">
             <span class="summary-label">Battles Played</span>
             <strong id="summary-rounds" class="summary-value">0</strong>
           </div>
@@ -192,6 +368,18 @@
           <div class="summary-stat">
             <span class="summary-label">Correct Bets</span>
             <strong id="summary-bets" class="summary-value">0</strong>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-label">Accuracy</span>
+            <strong id="summary-accuracy" class="summary-value">0%</strong>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-label">Best Wallet</span>
+            <strong id="summary-best-wallet" class="summary-value">100</strong>
+          </div>
+          <div class="summary-stat">
+            <span class="summary-label">Best Streak</span>
+            <strong id="summary-best-streak" class="summary-value">0</strong>
           </div>
         </div>
 
