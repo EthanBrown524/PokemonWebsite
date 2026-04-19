@@ -7,6 +7,12 @@ import {
   getWinningSide,
   performAttack,
 } from "./battle.mjs";
+import {
+  playFaintSound,
+  playMoveSound,
+  playPokemonCry,
+  unlockSound,
+} from "./audio.mjs";
 import { loadGameAssets } from "./data.mjs";
 import { predictBattle } from "./predictor.mjs";
 
@@ -32,6 +38,7 @@ const state = {
   currentBet: DEFAULT_BET,
   currentBetSide: "player",
   activeBet: null,
+  awaitingNextRound: false,
   roulettePool: [],
   rouletteOffset: 0,
   rouletteFinalIndex: 0,
@@ -75,6 +82,7 @@ function cacheDom() {
   dom.matchupLabel = document.querySelector("#matchup-label");
   dom.walletAmount = document.querySelector("#wallet-amount");
   dom.startBattleButton = document.querySelector("#start-battle-button");
+  dom.nextRoundButton = document.querySelector("#next-round-button");
   dom.cashOutButton = document.querySelector("#cash-out-button");
   dom.playerName = document.querySelector("#player-name");
   dom.opponentName = document.querySelector("#opponent-name");
@@ -109,10 +117,26 @@ function cacheDom() {
 }
 
 function attachEvents() {
-  dom.startRunButton.addEventListener("click", () => startSession());
-  dom.restartRunButton.addEventListener("click", () => startSession());
-  dom.startBattleButton.addEventListener("click", () => startBattle());
+  dom.startRunButton.addEventListener("click", () => {
+    void unlockSound();
+    startSession();
+  });
+  dom.restartRunButton.addEventListener("click", () => {
+    void unlockSound();
+    startSession();
+  });
+  dom.startBattleButton.addEventListener("click", () => {
+    void unlockSound();
+    startBattle();
+  });
+  dom.nextRoundButton.addEventListener("click", () => {
+    void unlockSound();
+    if (state.awaitingNextRound && !state.autoPlaying && state.sessionActive && state.wallet > 0) {
+      beginRouletteFlow();
+    }
+  });
   dom.cashOutButton.addEventListener("click", () => {
+    void unlockSound();
     if (!state.autoPlaying && state.sessionActive) {
       endSession("cashout");
     }
@@ -288,6 +312,7 @@ function startSession() {
   state.currentBet = DEFAULT_BET;
   state.currentBetSide = "player";
   state.activeBet = null;
+  state.awaitingNextRound = false;
   state.sessionActive = true;
   state.player = null;
   state.opponent = null;
@@ -309,6 +334,7 @@ function startSession() {
 function beginRouletteFlow() {
   stopBattle();
   state.activeBet = null;
+  state.awaitingNextRound = false;
   state.rouletteSelectedPokemon = randomChoice(state.gameData.pokemon);
   const rouletteSetup = buildRoulettePool(state.gameData.pokemon, state.rouletteSelectedPokemon, ROULETTE_SLOT_COUNT);
   state.roulettePool = rouletteSetup.pool;
@@ -371,6 +397,7 @@ function prepareMatchupForPlayer(playerSpecies) {
   };
   state.battleReady = true;
   state.autoPlaying = false;
+  state.awaitingNextRound = false;
   state.pendingTurnActions = [];
   state.activeBet = null;
   state.lastOutcome = null;
@@ -388,6 +415,8 @@ function prepareMatchupForPlayer(playerSpecies) {
   updateBattlefield();
   refreshInterface();
   showScreen("game");
+  playPokemonCry(state.player, "player");
+  window.setTimeout(() => playPokemonCry(state.opponent, "opponent"), 180);
 }
 
 function predictionMessage() {
@@ -515,7 +544,9 @@ function updateBetControls() {
   }
 
   if (!state.battleReady && state.lastOutcome) {
-    dom.betSummary.textContent = "Round settled. A new matchup is rolling in now.";
+    dom.betSummary.textContent = state.awaitingNextRound
+      ? "Round settled. Press Next Round to spin again, or Cash Out."
+      : "Round settled.";
     return;
   }
 
@@ -575,8 +606,10 @@ function updateBattleStateDisplay() {
 
 function updateActionButtons() {
   const canStartBattle = state.battleReady && !state.autoPlaying && state.wallet > 0 && state.currentBet > 0;
+  const canAdvanceRound = state.awaitingNextRound && !state.autoPlaying && state.sessionActive && state.wallet > 0;
 
   dom.startBattleButton.disabled = !canStartBattle;
+  dom.nextRoundButton.disabled = !canAdvanceRound;
   dom.cashOutButton.disabled = !state.sessionActive || state.autoPlaying || state.wallet <= 0;
   dom.betAmount.disabled = !canStartBattle;
   dom.betPlayerButton.disabled = !canStartBattle;
@@ -586,6 +619,7 @@ function updateActionButtons() {
     button.disabled = !canStartBattle;
   }
   dom.startBattleButton.textContent = state.autoPlaying ? "Battle Running" : "Start Battle";
+  dom.nextRoundButton.textContent = "Next Round";
 }
 
 function hpFillColor(percentage) {
@@ -644,6 +678,7 @@ function startBattle() {
   };
   state.battleReady = false;
   state.autoPlaying = true;
+  state.awaitingNextRound = false;
   state.pendingTurnActions = [];
   state.hpAnimationCallback = null;
   state.lastOutcome = null;
@@ -690,8 +725,12 @@ function playNextTurnAction() {
       continue;
     }
 
+    playMoveSound(move, attacker === state.player ? "player" : "opponent");
     for (const note of performAttack(attacker, defender, move)) {
       appendLog(note, "battle");
+    }
+    if (defender.isFainted) {
+      playFaintSound(defender, defender === state.player ? "player" : "opponent");
     }
 
     updateBattlefield();
@@ -815,12 +854,10 @@ function settleBet() {
     state.stats.bestBetStreak = Math.max(state.stats.bestBetStreak, state.stats.betStreak);
     state.wallet += state.activeBet.amount;
     appendLog(`Bet won! ${winningPokemon} paid out ${formatMoney(state.activeBet.amount)} Pokedollars.`, "bet");
-    showRoundSummary(`You hit the wager and now have ${formatMoney(state.wallet)} Pokedollars. Another matchup is loading.`);
   } else {
     state.stats.betStreak = 0;
     state.wallet = Math.max(0, state.wallet - state.activeBet.amount);
     appendLog(`Bet lost. ${formatMoney(state.activeBet.amount)} Pokedollars left your wallet.`, "bet");
-    showRoundSummary(`The wager missed. Wallet now at ${formatMoney(state.wallet)} Pokedollars. Another matchup is loading.`);
   }
 
   state.stats.bestWallet = Math.max(state.stats.bestWallet, state.wallet);
@@ -834,16 +871,18 @@ function settleBet() {
   appendLog(`Wallet total: ${formatMoney(state.wallet)} Pokedollars.`, "bet");
   state.activeBet = null;
   state.battleReady = false;
+  state.awaitingNextRound = state.wallet > 0;
 
   if (state.wallet <= 0) {
+    state.awaitingNextRound = false;
     showRoundSummary("You ran out of money. This run is over.");
     refreshInterface();
     setTimer("turn", 1200, () => endSession("bankrupt"));
     return;
   }
 
+  showRoundSummary(`Round settled. Wallet at ${formatMoney(state.wallet)} Pokedollars. Press Next Round or Cash Out.`);
   refreshInterface();
-  setTimer("turn", 1200, beginRouletteFlow);
 }
 
 function endSession(reason) {
@@ -851,6 +890,7 @@ function endSession(reason) {
   state.sessionActive = false;
   state.autoPlaying = false;
   state.battleReady = false;
+  state.awaitingNextRound = false;
   updateActionButtons();
   updateSummary(reason);
   showScreen("summary");
