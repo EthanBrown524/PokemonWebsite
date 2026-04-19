@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pokemon Battle Simulator</title>
+  <title>Pokemon Gambling</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="app-shell">
     <section id="start-screen" class="screen is-active" aria-labelledby="start-title">
       <div class="panel start-panel">
-        <h1 id="start-title" class="visually-hidden">Pokemon Battle Simulator</h1>
+        <h1 id="start-title">Pokemon Gambling</h1>
+        <div class="hero-sprite-frame">
+          <img id="start-pikachu" alt="Pikachu preview sprite" class="pixel-art hero-sprite">
+        </div>
         <button id="start-run-button" class="app-button start-only-button" type="button" disabled>Start</button>
       </div>
     </section>
@@ -103,17 +106,6 @@
                 </div>
               </section>
             </div>
-
-            <div class="battle-controls">
-              <div class="battle-status-copy">
-                <strong id="battle-state-label" class="battle-state-label">Idle</strong>
-                <p id="round-summary" class="round-summary">A new matchup appears automatically after each battle.</p>
-              </div>
-              <div class="controls-actions">
-                <button id="start-battle-button" class="app-button" type="button" disabled>Start Battle</button>
-                <button id="cash-out-button" class="app-button secondary" type="button">Cash Out</button>
-              </div>
-            </div>
           </div>
 
           <div class="panel log-panel">
@@ -160,6 +152,17 @@
             </div>
 
             <p id="bet-summary" class="bet-summary">Choose your side and lock in a bet before the battle starts.</p>
+
+            <div class="betting-actions">
+              <div class="battle-status-copy sidebar-status-copy">
+                <strong id="battle-state-label" class="battle-state-label">Idle</strong>
+                <p id="round-summary" class="round-summary">A new matchup appears automatically after each battle.</p>
+              </div>
+              <div class="controls-actions sidebar-actions">
+                <button id="start-battle-button" class="app-button" type="button" disabled>Start Battle</button>
+                <button id="cash-out-button" class="app-button secondary" type="button">Cash Out</button>
+              </div>
+            </div>
           </div>
         </aside>
       </div>

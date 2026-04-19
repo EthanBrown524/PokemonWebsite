@@ -139,11 +139,32 @@ h3 {
 }
 
 .start-panel {
-  width: min(100%, 240px);
+  width: min(100%, 340px);
   margin: auto;
   display: grid;
   place-items: center;
-  min-height: 120px;
+  gap: 16px;
+  min-height: 320px;
+  text-align: center;
+}
+
+.start-panel h1 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.hero-sprite-frame {
+  width: min(190px, 60vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  background: rgba(255, 245, 240, 0.1);
+  border: 3px solid rgba(255, 245, 240, 0.28);
+}
+
+.hero-sprite {
+  width: 74%;
+  filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.28));
 }
 
 .start-only-button {
@@ -333,11 +354,13 @@ h3 {
 }
 
 .game-grid {
-  width: min(100%, 1060px);
+  width: min(100%, 1100px);
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
-  gap: 14px;
-  align-items: start;
+  grid-template-columns: minmax(0, 1.9fr) minmax(250px, 0.72fr);
+  gap: 12px;
+  height: calc(100vh - 28px);
+  max-height: calc(100vh - 28px);
+  align-items: stretch;
 }
 
 .main-column,
@@ -345,6 +368,15 @@ h3 {
   display: grid;
   gap: 14px;
   min-width: 0;
+  min-height: 0;
+}
+
+.main-column {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.sidebar {
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .simple-header,
@@ -360,6 +392,12 @@ h3 {
   margin-bottom: 12px;
 }
 
+.arena-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-height: 0;
+}
+
 .simple-header h2 {
   font-size: 1.15rem;
 }
@@ -372,7 +410,8 @@ h3 {
 
 .battlefield {
   position: relative;
-  height: clamp(290px, 32vw, 390px);
+  height: 100%;
+  min-height: 0;
   background:
     linear-gradient(180deg, rgba(27, 20, 20, 0.16), rgba(27, 20, 20, 0.1)),
     url("assets/sprites/battle_background.png") center / cover no-repeat,
@@ -462,15 +501,6 @@ h3 {
   filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.35));
 }
 
-.battle-controls {
-  margin-top: 10px;
-  padding: 12px;
-  border: 3px solid rgba(48, 48, 48, 0.72);
-  background: rgba(48, 48, 48, 0.18);
-  display: grid;
-  gap: 12px;
-}
-
 .battle-status-copy {
   display: grid;
   gap: 6px;
@@ -506,7 +536,11 @@ h3 {
 }
 
 .betting-panel {
-  align-self: start;
+  align-self: stretch;
+  display: grid;
+  align-content: start;
+  grid-auto-rows: min-content;
+  min-height: 0;
 }
 
 .prediction-text {
@@ -593,14 +627,32 @@ h3 {
   margin-top: 14px;
 }
 
+.betting-actions {
+  margin-top: 16px;
+  padding: 12px;
+  border: 3px solid rgba(48, 48, 48, 0.72);
+  background: rgba(48, 48, 48, 0.18);
+  display: grid;
+  gap: 12px;
+}
+
+.sidebar-status-copy {
+  gap: 4px;
+}
+
 .battle-log {
   margin-top: 12px;
-  height: 180px;
+  height: 150px;
   overflow-y: auto;
   padding: 12px;
   background: var(--log-bg);
   border: 2px solid rgba(48, 48, 48, 0.66);
   color: var(--text-dark);
+}
+
+.log-panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
 }
 
 .log-entry {
@@ -674,7 +726,18 @@ h3 {
 
 @media (max-width: 980px) {
   .game-grid {
+    height: auto;
+    max-height: none;
     grid-template-columns: 1fr;
+  }
+
+  .main-column,
+  .sidebar {
+    grid-template-rows: auto;
+  }
+
+  .arena-panel {
+    grid-template-rows: auto;
   }
 }
 
