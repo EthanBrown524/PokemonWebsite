@@ -37,6 +37,7 @@ const state = {
   rouletteFinalIndex: 0,
   rouletteStepsRemaining: 0,
   rouletteSelectedPokemon: null,
+  lastOutcome: null,
   timers: {
     turn: null,
     hp: null,
@@ -48,6 +49,9 @@ const state = {
     rounds: 0,
     wins: 0,
     correctBets: 0,
+    betStreak: 0,
+    bestBetStreak: 0,
+    bestWallet: INITIAL_WALLET,
   },
 };
 
@@ -63,6 +67,7 @@ function cacheDom() {
   dom.statusBanner = document.querySelector("#status-banner");
   dom.startRunButton = document.querySelector("#start-run-button");
   dom.startPikachu = document.querySelector("#start-pikachu");
+
   dom.rouletteWalletAmount = document.querySelector("#roulette-wallet-amount");
   dom.rouletteHint = document.querySelector("#roulette-hint");
   dom.rouletteResult = document.querySelector("#roulette-result");
@@ -82,21 +87,65 @@ function cacheDom() {
   dom.opponentHpFill = document.querySelector("#opponent-hp-fill");
   dom.playerHpLabel = document.querySelector("#player-hp-label");
   dom.opponentHpLabel = document.querySelector("#opponent-hp-label");
+  dom.battleStateCard = document.querySelector("#battle-state-card");
+  dom.battleStateLabel = document.querySelector("#battle-state-label");
+  dom.hudRound = document.querySelector("#hud-round");
+  dom.hudWins = document.querySelector("#hud-wins");
+  dom.hudBets = document.querySelector("#hud-bets");
+  dom.hudStreak = document.querySelector("#hud-streak");
+  dom.arenaTitle = document.querySelector("#arena-title");
+
+  dom.predictionFavored = document.querySelector("#prediction-favored");
+  dom.predictionPlayerName = document.querySelector("#prediction-player-name");
+  dom.predictionOpponentName = document.querySelector("#prediction-opponent-name");
+  dom.predictionPlayerChance = document.querySelector("#prediction-player-chance");
+  dom.predictionOpponentChance = document.querySelector("#prediction-opponent-chance");
+  dom.predictionBarFill = document.querySelector("#prediction-bar-fill");
   dom.predictionText = document.querySelector("#prediction-text");
   dom.betPlayerButton = document.querySelector("#bet-player-button");
   dom.betOpponentButton = document.querySelector("#bet-opponent-button");
   dom.betAmount = document.querySelector("#bet-amount");
   dom.betMaxButton = document.querySelector("#bet-max-button");
+  dom.quickBetButtons = [...document.querySelectorAll(".quick-bet-button")];
   dom.betSummary = document.querySelector("#bet-summary");
+  dom.phasePill = document.querySelector("#phase-pill");
+  dom.betLockLabel = document.querySelector("#bet-lock-label");
   dom.roundSummary = document.querySelector("#round-summary");
   dom.battleLog = document.querySelector("#battle-log");
+
+  dom.previewCards = {
+    player: {
+      card: document.querySelector("#matchup-card-player"),
+      sprite: document.querySelector("#preview-player-sprite"),
+      name: document.querySelector("#preview-player-name"),
+      types: document.querySelector("#preview-player-types"),
+      hp: document.querySelector("#preview-player-hp"),
+      attack: document.querySelector("#preview-player-attack"),
+      speed: document.querySelector("#preview-player-speed"),
+      total: document.querySelector("#preview-player-total"),
+    },
+    opponent: {
+      card: document.querySelector("#matchup-card-opponent"),
+      sprite: document.querySelector("#preview-opponent-sprite"),
+      name: document.querySelector("#preview-opponent-name"),
+      types: document.querySelector("#preview-opponent-types"),
+      hp: document.querySelector("#preview-opponent-hp"),
+      attack: document.querySelector("#preview-opponent-attack"),
+      speed: document.querySelector("#preview-opponent-speed"),
+      total: document.querySelector("#preview-opponent-total"),
+    },
+  };
 
   dom.summaryTitle = document.querySelector("#summary-title");
   dom.summaryCopy = document.querySelector("#summary-copy");
   dom.summaryWallet = document.querySelector("#summary-wallet");
+  dom.summaryNet = document.querySelector("#summary-net");
   dom.summaryRounds = document.querySelector("#summary-rounds");
   dom.summaryWins = document.querySelector("#summary-wins");
   dom.summaryBets = document.querySelector("#summary-bets");
+  dom.summaryAccuracy = document.querySelector("#summary-accuracy");
+  dom.summaryBestWallet = document.querySelector("#summary-best-wallet");
+  dom.summaryBestStreak = document.querySelector("#summary-best-streak");
   dom.restartRunButton = document.querySelector("#restart-run-button");
 }
 
@@ -104,7 +153,7 @@ function attachEvents() {
   dom.startRunButton.addEventListener("click", () => startSession());
   dom.restartRunButton.addEventListener("click", () => startSession());
   dom.randomMatchupButton.addEventListener("click", () => {
-    if (!state.autoPlaying && state.sessionActive) {
+    if (!state.autoPlaying && state.sessionActive && !state.battleReady) {
       beginRouletteFlow();
     }
   });
@@ -116,26 +165,38 @@ function attachEvents() {
   });
   dom.betPlayerButton.addEventListener("click", () => {
     state.currentBetSide = "player";
-    updateBetControls();
+    refreshInterface();
   });
   dom.betOpponentButton.addEventListener("click", () => {
     state.currentBetSide = "opponent";
-    updateBetControls();
+    refreshInterface();
   });
   dom.betAmount.addEventListener("input", () => {
     state.currentBet = normalizeBetAmount();
-    updateBetControls();
+    refreshInterface();
   });
   dom.betAmount.addEventListener("blur", () => {
     state.currentBet = normalizeBetAmount();
     dom.betAmount.value = String(state.currentBet);
-    updateBetControls();
+    refreshInterface();
   });
   dom.betMaxButton.addEventListener("click", () => {
-    state.currentBet = Math.max(1, state.wallet);
+    state.currentBet = Math.max(0, state.wallet);
     dom.betAmount.value = String(state.currentBet);
-    updateBetControls();
+    refreshInterface();
   });
+
+  for (const button of dom.quickBetButtons) {
+    button.addEventListener("click", () => {
+      const amount = Number.parseInt(button.dataset.betAmount ?? "", 10);
+      if (!Number.isFinite(amount)) {
+        return;
+      }
+      state.currentBet = clampBet(amount);
+      dom.betAmount.value = String(state.currentBet);
+      refreshInterface();
+    });
+  }
 }
 
 function showScreen(name) {
@@ -152,6 +213,33 @@ function setStatus(message, tone = "") {
   }
 }
 
+function formatMoney(amount) {
+  return new Intl.NumberFormat("en-US").format(Math.max(0, Math.round(amount)));
+}
+
+function formatSignedMoney(amount) {
+  const rounded = Math.round(amount);
+  if (rounded === 0) {
+    return "0";
+  }
+  return `${rounded > 0 ? "+" : "-"}${formatMoney(Math.abs(rounded))}`;
+}
+
+function formatPercent(value) {
+  return `${(value * 100).toFixed(1)}%`;
+}
+
+function statTotal(species) {
+  return species.hp + species.attack + species.defense + species.spAttack + species.spDefense + species.speed;
+}
+
+function currentRoundNumber() {
+  if (!state.sessionActive) {
+    return 0;
+  }
+  return state.stats.rounds + 1;
+}
+
 function updateWalletDisplays() {
   const walletText = formatMoney(state.wallet);
   dom.walletAmount.textContent = walletText;
@@ -159,8 +247,11 @@ function updateWalletDisplays() {
   dom.rouletteWalletAmount.textContent = walletText;
 }
 
-function formatMoney(amount) {
-  return new Intl.NumberFormat("en-US").format(Math.max(0, amount));
+function updateHudDisplays() {
+  dom.hudRound.textContent = String(currentRoundNumber());
+  dom.hudWins.textContent = String(state.stats.wins);
+  dom.hudBets.textContent = String(state.stats.correctBets);
+  dom.hudStreak.textContent = String(state.stats.betStreak);
 }
 
 function showRoundSummary(message) {
@@ -171,9 +262,34 @@ function clearLog() {
   dom.battleLog.innerHTML = "";
 }
 
-function appendLog(message) {
+function classifyLogKind(message) {
+  const lowered = message.toLowerCase();
+  if (lowered.includes("machine read") || lowered.includes("ml prediction")) {
+    return "prediction";
+  }
+  if (lowered.includes("bet ") || lowered.includes("wallet")) {
+    return "bet";
+  }
+  if (
+    lowered.includes("used ")
+    || lowered.includes("super effective")
+    || lowered.includes("critical hit")
+    || lowered.includes("damage")
+    || lowered.includes("attack missed")
+    || lowered.includes("the attack missed")
+  ) {
+    return "battle";
+  }
+  if (lowered.includes("you win") || lowered.includes("you lost") || lowered.includes("fainted")) {
+    return "result";
+  }
+  return "system";
+}
+
+function appendLog(message, kind = "") {
   const entry = document.createElement("div");
   entry.className = "log-entry";
+  entry.classList.add(`is-${kind || classifyLogKind(message)}`);
   entry.textContent = message;
   dom.battleLog.append(entry);
   dom.battleLog.scrollTop = dom.battleLog.scrollHeight;
@@ -208,6 +324,17 @@ function stopBattle() {
   clearTimer("turn");
   clearTimer("hp");
   updateActionButtons();
+  updateBattleStateDisplay();
+}
+
+function refreshInterface() {
+  updateWalletDisplays();
+  updateHudDisplays();
+  updatePredictionPanel();
+  updateBetControls();
+  updatePreviewCards();
+  updateActionButtons();
+  updateBattleStateDisplay();
 }
 
 function startSession() {
@@ -217,16 +344,26 @@ function startSession() {
   state.currentBetSide = "player";
   state.activeBet = null;
   state.sessionActive = true;
-  state.stats = { rounds: 0, wins: 0, correctBets: 0 };
   state.player = null;
   state.opponent = null;
   state.currentPrediction = null;
-  updateWalletDisplays();
+  state.lastOutcome = null;
+  state.stats = {
+    rounds: 0,
+    wins: 0,
+    correctBets: 0,
+    betStreak: 0,
+    bestBetStreak: 0,
+    bestWallet: INITIAL_WALLET,
+  };
+  clearLog();
+  refreshInterface();
   beginRouletteFlow();
 }
 
 function beginRouletteFlow() {
   stopBattle();
+  state.activeBet = null;
   state.rouletteSelectedPokemon = randomChoice(state.gameData.pokemon);
   const rouletteSetup = buildRoulettePool(state.gameData.pokemon, state.rouletteSelectedPokemon, ROULETTE_SLOT_COUNT);
   state.roulettePool = rouletteSetup.pool;
@@ -291,20 +428,20 @@ function prepareMatchupForPlayer(playerSpecies) {
   state.autoPlaying = false;
   state.pendingTurnActions = [];
   state.activeBet = null;
+  state.lastOutcome = null;
   state.currentPrediction = predictBattle(state.gameData.battleModel, state.player, state.opponent);
 
   dom.matchupLabel.textContent = `${state.player.name} vs ${state.opponent.name}`;
   clearLog();
-  appendLog(`Roulette selected ${state.player.name}.`);
-  appendLog(`Opponent chosen: ${state.opponent.name}.`);
-  appendLog(predictionMessage());
-  appendLog("Lock in a bet, then press Start Battle to watch the fight play out.");
-  showRoundSummary("Bet on either side before the battle starts. Winnings pay even money.");
+  appendLog(`Roulette locked in ${state.player.name}.`, "system");
+  appendLog(`Opponent drawn: ${state.opponent.name}.`, "system");
+  appendLog(predictionMessage(), "prediction");
+  appendLog("Pick a side, set your wager, and press Watch Battle to let the machine resolve the round.", "system");
+  showRoundSummary("This matchup is locked. Set your wager, then press Watch Battle to start the auto battle.");
 
   syncBetWithWallet();
   updateBattlefield();
-  updateBetControls();
-  updateActionButtons();
+  refreshInterface();
   showScreen("game");
 }
 
@@ -312,7 +449,9 @@ function predictionMessage() {
   if (!state.currentPrediction) {
     return "ML prediction unavailable.";
   }
-  return `ML prediction: ${state.currentPrediction.predictedWinner} has a ${(state.currentPrediction.confidence * 100).toFixed(1)}% chance to win.`;
+  const playerChance = formatPercent(state.currentPrediction.firstWinProbability);
+  const opponentChance = formatPercent(state.currentPrediction.secondWinProbability);
+  return `Machine read: ${state.player.name} ${playerChance}, ${state.opponent.name} ${opponentChance}.`;
 }
 
 function normalizeBetAmount() {
@@ -324,7 +463,10 @@ function normalizeBetAmount() {
 }
 
 function clampBet(value) {
-  const walletCap = Math.max(1, state.wallet);
+  const walletCap = Math.max(0, state.wallet);
+  if (walletCap === 0) {
+    return 0;
+  }
   return Math.min(walletCap, Math.max(1, value));
 }
 
@@ -340,20 +482,191 @@ function betTargetName(side) {
   return state.player?.name ?? "Your Pokemon";
 }
 
+function selectedBetSide() {
+  return state.activeBet?.side ?? state.currentBetSide;
+}
+
+function renderTypeChips(container, types) {
+  container.replaceChildren();
+  for (const type of types) {
+    const chip = document.createElement("span");
+    chip.className = `type-chip type-${String(type).toLowerCase()}`;
+    chip.textContent = type;
+    container.append(chip);
+  }
+}
+
+function populatePreviewCard(side, pokemon) {
+  const preview = dom.previewCards[side];
+  preview.card.classList.toggle("is-selected", Boolean(pokemon) && selectedBetSide() === side);
+
+  if (!pokemon) {
+    preview.sprite.removeAttribute("src");
+    preview.sprite.alt = "";
+    preview.name.textContent = side === "player" ? "Waiting for a spin" : "Waiting for an opponent";
+    preview.types.replaceChildren();
+    preview.hp.textContent = "0";
+    preview.attack.textContent = "0";
+    preview.speed.textContent = "0";
+    preview.total.textContent = "0";
+    return;
+  }
+
+  preview.sprite.src = side === "player" ? pokemon.species.backSprite : pokemon.species.frontSprite;
+  preview.sprite.alt = `${pokemon.name} preview sprite`;
+  preview.name.textContent = pokemon.name;
+  renderTypeChips(preview.types, pokemon.types);
+  preview.hp.textContent = String(pokemon.species.hp);
+  preview.attack.textContent = String(pokemon.species.attack);
+  preview.speed.textContent = String(pokemon.species.speed);
+  preview.total.textContent = String(statTotal(pokemon.species));
+}
+
+function updatePreviewCards() {
+  populatePreviewCard("player", state.player);
+  populatePreviewCard("opponent", state.opponent);
+}
+
+function updatePredictionPanel() {
+  if (!state.player || !state.opponent || !state.currentPrediction) {
+    dom.predictionFavored.textContent = "No matchup loaded";
+    dom.predictionPlayerName.textContent = "Your Pokemon";
+    dom.predictionOpponentName.textContent = "Opponent";
+    dom.predictionPlayerChance.textContent = "50.0%";
+    dom.predictionOpponentChance.textContent = "50.0%";
+    dom.predictionBarFill.style.width = "50%";
+    dom.predictionBarFill.style.background = "linear-gradient(90deg, rgba(62, 199, 111, 0.95), rgba(129, 212, 102, 0.92))";
+    dom.predictionText.textContent = "ML prediction unavailable.";
+    return;
+  }
+
+  const playerChance = state.currentPrediction.firstWinProbability;
+  const opponentChance = state.currentPrediction.secondWinProbability;
+  const favoredName = playerChance >= opponentChance ? state.player.name : state.opponent.name;
+
+  dom.predictionFavored.textContent = `Machine leans ${favoredName}`;
+  dom.predictionPlayerName.textContent = state.player.name;
+  dom.predictionOpponentName.textContent = state.opponent.name;
+  dom.predictionPlayerChance.textContent = formatPercent(playerChance);
+  dom.predictionOpponentChance.textContent = formatPercent(opponentChance);
+  dom.predictionBarFill.style.width = `${(playerChance * 100).toFixed(1)}%`;
+  dom.predictionBarFill.style.background = playerChance >= opponentChance
+    ? "linear-gradient(90deg, rgba(62, 199, 111, 0.95), rgba(129, 212, 102, 0.92))"
+    : "linear-gradient(90deg, rgba(245, 197, 66, 0.95), rgba(230, 108, 68, 0.92))";
+  dom.predictionText.textContent = `${state.currentPrediction.predictedWinner} is projected to win with ${formatPercent(state.currentPrediction.confidence)} confidence.`;
+}
+
+function updateQuickBetButtons() {
+  for (const button of dom.quickBetButtons) {
+    const amount = Number.parseInt(button.dataset.betAmount ?? "", 10);
+    button.classList.toggle("is-selected", Number.isFinite(amount) && amount === state.currentBet);
+  }
+}
+
 function updateBetControls() {
   syncBetWithWallet();
-  dom.betAmount.max = String(Math.max(1, state.wallet));
-  dom.betPlayerButton.classList.toggle("is-selected", state.currentBetSide === "player");
-  dom.betOpponentButton.classList.toggle("is-selected", state.currentBetSide === "opponent");
-  dom.betPlayerButton.textContent = state.player ? `Bet ${state.player.name}` : "Your Pokemon";
-  dom.betOpponentButton.textContent = state.opponent ? `Bet ${state.opponent.name}` : "Opponent";
-  dom.predictionText.textContent = predictionMessage();
+  dom.betAmount.min = state.wallet > 0 ? "1" : "0";
+  dom.betAmount.max = String(Math.max(0, state.wallet));
+  dom.betPlayerButton.classList.toggle("is-selected", selectedBetSide() === "player");
+  dom.betOpponentButton.classList.toggle("is-selected", selectedBetSide() === "opponent");
+  dom.betPlayerButton.textContent = state.player?.name ?? "Your Pokemon";
+  dom.betOpponentButton.textContent = state.opponent?.name ?? "Opponent";
+  updateQuickBetButtons();
+
+  if (!state.player || !state.opponent) {
+    dom.betSummary.textContent = "Roulette will lock in your Pokemon before the betting desk opens.";
+    return;
+  }
+
+  if (state.activeBet) {
+    dom.betSummary.textContent = `Locked ${formatMoney(state.activeBet.amount)} on ${state.activeBet.targetName}. Sit back and watch the auto battle resolve.`;
+    return;
+  }
+
+  if (state.wallet <= 0) {
+    dom.betSummary.textContent = "The wallet is empty. This run is finished.";
+    return;
+  }
+
+  if (!state.battleReady && state.lastOutcome) {
+    dom.betSummary.textContent = "Round settled. Spin the next matchup to open a new wager.";
+    return;
+  }
+
   dom.betSummary.textContent = `Bet ${formatMoney(state.currentBet)} on ${betTargetName(state.currentBetSide)}. A correct pick wins the same amount.`;
 }
 
+function phaseSnapshot() {
+  if (!state.sessionActive) {
+    return {
+      label: "Idle",
+      tone: "",
+      arena: "Spin a matchup to open the betting desk.",
+      lock: "No active wager",
+    };
+  }
+
+  if (state.wallet <= 0 && !state.autoPlaying) {
+    return {
+      label: "Bankrupt",
+      tone: "is-loss",
+      arena: "The bankroll is empty. This run is about to close out.",
+      lock: "Wallet empty",
+    };
+  }
+
+  if (state.autoPlaying && state.activeBet) {
+    return {
+      label: "Battle Live",
+      tone: "is-live",
+      arena: `${state.player.name} and ${state.opponent.name} are fighting automatically.`,
+      lock: `Locked: ${formatMoney(state.activeBet.amount)} on ${state.activeBet.targetName}`,
+    };
+  }
+
+  if (state.battleReady && state.player && state.opponent) {
+    return {
+      label: "Bet Open",
+      tone: "is-open",
+      arena: "Review the matchup, set your wager, and press Watch Battle when you are ready.",
+      lock: `Ready: ${formatMoney(state.currentBet)} on ${betTargetName(state.currentBetSide)}`,
+    };
+  }
+
+  if (state.lastOutcome) {
+    return {
+      label: state.lastOutcome.betWon ? "Round Won" : "Round Lost",
+      tone: state.lastOutcome.betWon ? "is-win" : "is-loss",
+      arena: `${state.lastOutcome.winningPokemon} took the round. Spin the next matchup or cash out.`,
+      lock: `${state.lastOutcome.betWon ? "Last payout" : "Last loss"}: ${formatMoney(state.lastOutcome.amount)}`,
+    };
+  }
+
+  return {
+    label: "Between Rounds",
+    tone: "",
+    arena: "Spin the next matchup to keep the run going.",
+    lock: "No active wager",
+  };
+}
+
+function updateBattleStateDisplay() {
+  const snapshot = phaseSnapshot();
+  dom.battleStateCard.className = "state-pill";
+  dom.phasePill.className = "phase-pill";
+  if (snapshot.tone) {
+    dom.battleStateCard.classList.add(snapshot.tone);
+    dom.phasePill.classList.add(snapshot.tone);
+  }
+  dom.battleStateLabel.textContent = snapshot.label;
+  dom.phasePill.textContent = snapshot.label;
+  dom.arenaTitle.textContent = snapshot.arena;
+  dom.betLockLabel.textContent = snapshot.lock;
+}
+
 function updateActionButtons() {
-  const canSpin = state.sessionActive && !state.autoPlaying && state.wallet > 0;
-  const canStartBattle = state.battleReady && !state.autoPlaying && state.wallet > 0;
+  const canSpin = state.sessionActive && !state.autoPlaying && !state.battleReady && state.wallet > 0;
+  const canStartBattle = state.battleReady && !state.autoPlaying && state.wallet > 0 && state.currentBet > 0;
 
   dom.randomMatchupButton.disabled = !canSpin;
   dom.startBattleButton.disabled = !canStartBattle;
@@ -362,6 +675,19 @@ function updateActionButtons() {
   dom.betPlayerButton.disabled = !canStartBattle;
   dom.betOpponentButton.disabled = !canStartBattle;
   dom.betMaxButton.disabled = !canStartBattle;
+  for (const button of dom.quickBetButtons) {
+    button.disabled = !canStartBattle;
+  }
+
+  if (state.autoPlaying) {
+    dom.randomMatchupButton.textContent = "Battle Running";
+  } else if (state.battleReady) {
+    dom.randomMatchupButton.textContent = "Matchup Locked";
+  } else {
+    dom.randomMatchupButton.textContent = state.stats.rounds > 0 ? "Next Matchup" : "Spin Matchup";
+  }
+
+  dom.startBattleButton.textContent = state.autoPlaying ? "Watching..." : "Watch Battle";
 }
 
 function hpFillColor(percentage) {
@@ -408,6 +734,10 @@ function startBattle() {
   }
 
   state.currentBet = normalizeBetAmount();
+  if (state.currentBet <= 0) {
+    return;
+  }
+
   dom.betAmount.value = String(state.currentBet);
   state.activeBet = {
     amount: state.currentBet,
@@ -418,11 +748,12 @@ function startBattle() {
   state.autoPlaying = true;
   state.pendingTurnActions = [];
   state.hpAnimationCallback = null;
+  state.lastOutcome = null;
 
-  appendLog(`Bet locked: ${formatMoney(state.activeBet.amount)} on ${state.activeBet.targetName}.`);
-  appendLog("Battle started.");
-  showRoundSummary(`Battle in progress. Current bet: ${formatMoney(state.activeBet.amount)} on ${state.activeBet.targetName}.`);
-  updateActionButtons();
+  appendLog(`Bet locked: ${formatMoney(state.activeBet.amount)} on ${state.activeBet.targetName}.`, "bet");
+  appendLog("Battle started. Watching the machine resolve the round...", "system");
+  showRoundSummary(`Auto battle in progress. Current wager: ${formatMoney(state.activeBet.amount)} on ${state.activeBet.targetName}.`);
+  refreshInterface();
   setTimer("turn", AUTO_BATTLE_DELAY_MS, autoPlayStep);
 }
 
@@ -462,7 +793,7 @@ function playNextTurnAction() {
     }
 
     for (const note of performAttack(attacker, defender, move)) {
-      appendLog(note);
+      appendLog(note, "battle");
     }
 
     updateBattlefield();
@@ -560,10 +891,10 @@ function finishAutoBattle() {
 
   const winnerMessage = getWinnerMessage(state.player, state.opponent);
   if (winnerMessage) {
-    appendLog(winnerMessage);
+    appendLog(winnerMessage, "result");
   }
   settleBet();
-  updateActionButtons();
+  refreshInterface();
 }
 
 function settleBet() {
@@ -579,30 +910,38 @@ function settleBet() {
   if (winningSide === "player") {
     state.stats.wins += 1;
   }
+
   if (betWon) {
     state.stats.correctBets += 1;
+    state.stats.betStreak += 1;
+    state.stats.bestBetStreak = Math.max(state.stats.bestBetStreak, state.stats.betStreak);
     state.wallet += state.activeBet.amount;
-    appendLog(`Bet won! ${winningPokemon} paid out ${formatMoney(state.activeBet.amount)} Pokedollars.`);
-    showRoundSummary(`You won the wager and now have ${formatMoney(state.wallet)} Pokedollars. Spin for the next matchup or cash out.`);
+    appendLog(`Bet won! ${winningPokemon} paid out ${formatMoney(state.activeBet.amount)} Pokedollars.`, "bet");
+    showRoundSummary(`You hit the wager and now have ${formatMoney(state.wallet)} Pokedollars. Spin the next matchup or cash out.`);
   } else {
+    state.stats.betStreak = 0;
     state.wallet = Math.max(0, state.wallet - state.activeBet.amount);
-    appendLog(`Bet lost. ${formatMoney(state.activeBet.amount)} Pokedollars left your wallet.`);
+    appendLog(`Bet lost. ${formatMoney(state.activeBet.amount)} Pokedollars left your wallet.`, "bet");
     showRoundSummary(`The wager missed. Wallet now at ${formatMoney(state.wallet)} Pokedollars.`);
   }
 
-  appendLog(`Wallet total: ${formatMoney(state.wallet)} Pokedollars.`);
+  state.stats.bestWallet = Math.max(state.stats.bestWallet, state.wallet);
+  state.lastOutcome = {
+    winningSide,
+    winningPokemon,
+    betWon,
+    amount: state.activeBet.amount,
+  };
+
+  appendLog(`Wallet total: ${formatMoney(state.wallet)} Pokedollars.`, "bet");
   state.activeBet = null;
-  updateWalletDisplays();
-  syncBetWithWallet();
-  updateBetControls();
+  state.battleReady = false;
 
   if (state.wallet <= 0) {
     showRoundSummary("You ran out of money. This run is over.");
+    refreshInterface();
     setTimer("turn", 1200, () => endSession("bankrupt"));
-    return;
   }
-
-  state.battleReady = false;
 }
 
 function endSession(reason) {
@@ -617,18 +956,25 @@ function endSession(reason) {
 
 function updateSummary(reason) {
   const walletText = `${formatMoney(state.wallet)} Pokedollars`;
+  const netChange = state.wallet - INITIAL_WALLET;
+  const accuracy = state.stats.rounds === 0 ? "0%" : `${Math.round((state.stats.correctBets / state.stats.rounds) * 100)}%`;
+
   if (reason === "bankrupt") {
     dom.summaryTitle.textContent = "Out of Pokedollars";
-    dom.summaryCopy.textContent = `The betting run ended because your wallet hit 0. You played ${state.stats.rounds} battle${state.stats.rounds === 1 ? "" : "s"} before the bankroll ran dry.`;
+    dom.summaryCopy.textContent = `The cabinet cleaned out the bankroll after ${state.stats.rounds} battle${state.stats.rounds === 1 ? "" : "s"}.`;
   } else {
     dom.summaryTitle.textContent = "You Cashed Out";
-    dom.summaryCopy.textContent = `You backed out with ${walletText}. Jump back in for another run whenever you want.`;
+    dom.summaryCopy.textContent = `You walked away with ${walletText} and a best streak of ${state.stats.bestBetStreak}.`;
   }
 
   dom.summaryWallet.textContent = walletText;
+  dom.summaryNet.textContent = `${formatSignedMoney(netChange)} Pokedollars`;
   dom.summaryRounds.textContent = String(state.stats.rounds);
   dom.summaryWins.textContent = String(state.stats.wins);
   dom.summaryBets.textContent = String(state.stats.correctBets);
+  dom.summaryAccuracy.textContent = accuracy;
+  dom.summaryBestWallet.textContent = `${formatMoney(state.stats.bestWallet)} Pokedollars`;
+  dom.summaryBestStreak.textContent = String(state.stats.bestBetStreak);
 }
 
 function randomChoice(values) {
@@ -638,14 +984,15 @@ function randomChoice(values) {
 async function initialize() {
   cacheDom();
   attachEvents();
-  updateWalletDisplays();
-  updateActionButtons();
+  refreshInterface();
+  updateBattlefield();
 
   try {
     state.gameData = await loadGameAssets();
     const pikachu = state.gameData.pokemonByName.get("pikachu");
     if (pikachu) {
       dom.startPikachu.src = pikachu.frontSprite;
+      dom.startPikachu.alt = `${pikachu.name} preview sprite`;
     }
     dom.startRunButton.disabled = false;
     setStatus("Battle data loaded. Start your run when you're ready.", "success");

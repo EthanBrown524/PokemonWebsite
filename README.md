@@ -29,7 +29,8 @@ http://localhost:8000
 - Press `Start` to begin a new run with `100` Pokedollars.
 - Watch the roulette choose your Pokemon.
 - Review the matchup and ML prediction.
-- Pick a side, enter a bet, and press `Start Battle`.
+- Pick a side, enter a bet, and press `Watch Battle`.
+- Each matchup is locked for that round, so you either watch the battle play out or cash out.
 - Spin another matchup or `Cash Out` after each battle.
 
 ## Data And Assets
